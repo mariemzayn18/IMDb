@@ -23,8 +23,6 @@ export class RegistrationService {
   user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
 
-  isDataLoaded = false; // Track the loading status
-
   constructor(private http: HttpClient, private router: Router) {}
 
   //------------ Sending signin request.
@@ -80,7 +78,6 @@ export class RegistrationService {
   //----------- Logging out, either manually or due to token's expired.
   logout() {
     this.user.next(null);
-    this.isDataLoaded = false;
 
     this.router.navigate(['/registration']); //to be changed to the home page ..
     localStorage.removeItem('userData');
@@ -118,7 +115,6 @@ export class RegistrationService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
-      this.isDataLoaded = true;
 
       // call autoLogout method to logout the user when his token expires.
       this.autoLogout(
@@ -142,7 +138,6 @@ export class RegistrationService {
     );
 
     // publish the currently logged in user
-    this.isDataLoaded = true;
     this.user.next(currentlyLoggedInUser);
 
     // call autoLogout method to logout the user when his token expires.

@@ -9,8 +9,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
-  isDataLoaded = false;
-
   private userSubscriber: Subscription = new Subscription();
 
   constructor(public registrationService: RegistrationService) {}
@@ -18,8 +16,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscriber = this.registrationService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
-      this.isDataLoaded = this.registrationService.isDataLoaded;
-      console.log(this.isDataLoaded );
     });
   }
 
