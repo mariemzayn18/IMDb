@@ -2,7 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../environments/environment';
-import { catchError, throwError } from 'rxjs';
+import { Subject, catchError, tap, throwError } from 'rxjs';
+import { User } from './user.model';
 
 interface RegResponseData {
   kind: string;
@@ -18,6 +19,8 @@ interface RegResponseData {
   providedIn: 'root',
 })
 export class RegistrationService {
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) {}
 
   signIn(email: string, password: string) {
@@ -31,7 +34,17 @@ export class RegistrationService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap((res) => {
+          this.handleAuthentication(
+            res.email,
+            res.localId,
+            res.idToken,
+            +res.expiresIn
+          );
+        })
+      );
   }
 
   signUp(email: string, password: string) {
@@ -45,7 +58,33 @@ export class RegistrationService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap((res) => {
+          this.handleAuthentication(
+            res.email,
+            res.localId,
+            res.idToken,
+            +res.expiresIn
+          );
+        })
+      );
+  }
+
+  private handleAuthentication(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number
+  ) {
+    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
+    const currentlyLoggedInUser = new User(
+      email,
+      userId,
+      token,
+      expirationDate
+    );
+    this.user.next(currentlyLoggedInUser);
   }
 
   private handleError(e: HttpErrorResponse) {
