@@ -7,55 +7,33 @@
   <div class="row pb-3">
     <div class="col-12">
       <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <div class="row" [ngClass]="{ 'pb-4': email.valid || !email.touched }">
-          <div class="col-12 form-group">
-            <label for="email" class="h6">Email</label>
-            <input
-              type="text"
-              name="email"
-              ngModel
-              class="form-control"
-              required
-              email
-              #email="ngModel"
-            />
-            <div
-              class="help-block alert alert-danger small mt-2 p-2"
-              *ngIf="!email.valid && email.touched"
-            >
-              Please Enter a Valid Email!
-            </div>
-          </div>
-        </div>
         <div
+          *ngFor="let field of formFields"
           class="row"
-          [ngClass]="{ 'pb-4': password.valid || !password.touched }"
+          [ngClass]="{ 'pb-4': currentField.valid || !currentField.touched }"
         >
           <div class="col-12 form-group">
-            <label for="password" class="h6">Password</label>
+            <label for="{{ field.name }}" class="h6">{{ field.label }}</label>
             <input
-              type="password"
-              name="password"
+              [type]="field.type"
+              [name]="field.name"
               ngModel
               class="form-control"
               required
-              #password="ngModel"
+              #currentField="ngModel"
+              [email]="field.name === 'email'"
             />
             <div
               class="help-block alert alert-danger small mt-2 p-2"
-              *ngIf="!password.valid && password.touched"
+              *ngIf="!currentField.valid && currentField.touched"
             >
-              Missing Password!
+              {{ field.errorMessage }}
             </div>
           </div>
         </div>
         <div class="row pb-4">
           <div class="d-grid">
-            <button
-              class="btn btn-block submitBtn"
-              type="submit"
-              [disabled]="!form.valid"
-            >
+            <button class="btn btn-block submitBtn" type="submit">
               Sign in
             </button>
           </div>
