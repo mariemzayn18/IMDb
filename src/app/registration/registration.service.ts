@@ -20,7 +20,19 @@ interface RegResponseData {
 export class RegistrationService {
   constructor(private http: HttpClient) {}
 
-  signIn(email: string, password: string) {}
+  signIn(email: string, password: string) {
+    return this.http
+      .post<RegResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+          environment.firebaseAPIKey,
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
 
   signUp(email: string, password: string) {
     return this.http
@@ -47,8 +59,11 @@ export class RegistrationService {
       case 'EMAIL_EXISTS':
         errorMessage = 'This email already exists.';
         break;
-      case 'INVALID_EMAIL':
-        errorMessage = 'This email is invalid.';
+      case 'INVALID_LOGIN_CREDENTIALS':
+        errorMessage = 'Incorrect email or password. Please try again.';
+        break;
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+        errorMessage = 'Too many attempts. Please try again later.';
         break;
     }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegistrationService } from './registration.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-registration',
@@ -38,6 +39,11 @@ export class RegistrationComponent {
 
   constructor(private registrationService: RegistrationService) {}
 
+  resetForm(form: NgForm) {
+    form.reset();
+    this.errorMessage = '';
+  }
+
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
@@ -47,7 +53,20 @@ export class RegistrationComponent {
     const password = form.value.password;
 
     if (this.isLoginMode) {
-      // this.registrationService.signIn(email, password);
+      this.registrationService.signIn(email, password).subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+          this.isLoading = false;
+        },
+        error: (e) => {
+          this.errorMessage = e.message;
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.resetForm(form);
+        },
+      });
     } else {
       this.isLoading = true;
       this.registrationService.signUp(email, password).subscribe({
@@ -59,13 +78,15 @@ export class RegistrationComponent {
           this.errorMessage = e.message;
           this.isLoading = false;
         },
+        complete: () => {
+          this.isLoading = false;
+          this.resetForm(form);
+        },
       });
     }
-
-    form.reset();
   }
 
-  switchButtons() {
+  switchButtons(form: NgForm) {
     this.isLoginMode = !this.isLoginMode;
     this.title = this.title === 'Sign in' ? 'Create account' : 'Sign in';
     this.submitButtonText =
@@ -78,5 +99,7 @@ export class RegistrationComponent {
       this.switchButtonText === 'Create your IMDb account'
         ? 'Sign in'
         : 'Create your IMDb account';
+
+    this.resetForm(form);
   }
 }
