@@ -7,16 +7,34 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/movies-catalog">Catalog</a>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/movies-catalog"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Catalog</a
+          >
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" (click)="logout()">Logout</a>
+          <a
+            class="nav-link"
+            (click)="logout()"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Logout</a
+          >
         </li>
 
-        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
-          <a class="nav-link" routerLink="/auth">Login</a>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a
+            class="nav-link"
+            routerLink="/auth"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Login</a
+          >
         </li>
       </ul>
     </div>
