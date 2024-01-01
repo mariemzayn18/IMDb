@@ -1,3 +1,13 @@
+.container {
+  width: 30%;
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    width: 75%;
+  }
+}
+
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
@@ -8,7 +18,11 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
-.submitBtn {
+.signInBtn {
   background-color: #ffd814;
   border: none;
+}
+
+.signInBtn:hover {
+  background-color: #f7ca00;
 }
