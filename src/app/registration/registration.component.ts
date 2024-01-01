@@ -14,6 +14,7 @@ export class RegistrationComponent {
   switchButtonText = 'Create your IMDb account';
   submitButtonText = 'Sign in';
   isLoginMode = true;
+  isLoading = false;
 
   formFields = [
     {
@@ -47,12 +48,15 @@ export class RegistrationComponent {
     if (this.isLoginMode) {
       // this.registrationService.signIn(email, password);
     } else {
+      this.isLoading = true;
       this.registrationService.signUp(email, password).subscribe({
         next: (responseData) => {
           console.log(responseData);
+          this.isLoading = false;
         },
         error: (e) => {
           console.error(e);
+          this.isLoading = false;
         },
       });
     }
