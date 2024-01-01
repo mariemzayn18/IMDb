@@ -54,6 +54,7 @@ export class AuthComponent {
     const password = form.value.password;
 
     if (this.isLoginMode) {
+      this.isLoading = true;
       this.authService.signIn(email, password).subscribe({
         next: (res) => {
           console.log(res);
