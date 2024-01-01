@@ -6,22 +6,56 @@
   </div>
   <div class="row pb-3">
     <div class="col-12">
-      <form>
-        <div class="row pb-4">
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="row" [ngClass]="{ 'pb-4': email.valid || !email.touched }">
           <div class="col-12 form-group">
-            <label for="email">Email</label>
-            <input type="text" name="email" class="form-control" />
+            <label for="email" class="h6">Email</label>
+            <input
+              type="text"
+              name="email"
+              ngModel
+              class="form-control"
+              required
+              email
+              #email="ngModel"
+            />
+            <div
+              class="help-block alert alert-danger small mt-2 p-2"
+              *ngIf="!email.valid && email.touched"
+            >
+              Please Enter a Valid Email!
+            </div>
           </div>
         </div>
-        <div class="row pb-4">
+        <div
+          class="row"
+          [ngClass]="{ 'pb-4': password.valid || !password.touched }"
+        >
           <div class="col-12 form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" />
+            <label for="password" class="h6">Password</label>
+            <input
+              type="password"
+              name="password"
+              ngModel
+              class="form-control"
+              required
+              #password="ngModel"
+            />
+            <div
+              class="help-block alert alert-danger small mt-2 p-2"
+              *ngIf="!password.valid && password.touched"
+            >
+              Missing Password!
+            </div>
           </div>
         </div>
         <div class="row pb-4">
           <div class="d-grid">
-            <button class="btn btn-block submitBtn" type="submit">
+            <button
+              class="btn btn-block submitBtn"
+              type="submit"
+              [disabled]="!form.valid"
+            >
               Sign in
             </button>
           </div>

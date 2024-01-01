@@ -1,3 +1,14 @@
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+input.ng-invalid.ng-touched:focus {
+  box-shadow: none;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
 .submitBtn {
   background-color: #ffd814;
+  border: none;
 }
