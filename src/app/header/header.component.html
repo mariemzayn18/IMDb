@@ -7,21 +7,14 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/movies-catalog"
-            routerLinkActive="active"
-            >Catalog</a
-          >
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/movies-catalog">Catalog</a>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/registration"
-            routerLinkActive="active"
-            >Login</a
-          >
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/registration">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>

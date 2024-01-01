@@ -15,6 +15,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { DangerAlertComponent } from './shared/danger-alert/danger-alert.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DangerAlertComponent } from './shared/danger-alert/danger-alert.compone
     MovieDetailsComponent,
     LoadingSpinnerComponent,
     DangerAlertComponent,
+    HomePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [provideClientHydration()],

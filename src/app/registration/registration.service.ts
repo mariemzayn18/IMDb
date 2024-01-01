@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from './user.model';
 
 interface RegResponseData {
@@ -19,9 +20,9 @@ interface RegResponseData {
   providedIn: 'root',
 })
 export class RegistrationService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signIn(email: string, password: string) {
     return this.http
@@ -71,6 +72,11 @@ export class RegistrationService {
       );
   }
 
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/registration']); //to be changed to the home page ..
+  }
+
   private handleAuthentication(
     email: string,
     userId: string,
@@ -108,6 +114,4 @@ export class RegistrationService {
 
     return throwError(() => new Error(errorMessage));
   }
-
-  logOut() {}
 }

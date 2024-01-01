@@ -6,3 +6,7 @@ img {
   width: 80px;
   height: auto;
 }
+
+a {
+  cursor: pointer;
+}

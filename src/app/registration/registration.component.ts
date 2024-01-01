@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { RegistrationService } from './registration.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-registration',
@@ -37,7 +38,10 @@ export class RegistrationComponent {
     },
   ];
 
-  constructor(private registrationService: RegistrationService) {}
+  constructor(
+    private registrationService: RegistrationService,
+    private router: Router
+  ) {}
 
   resetForm(form: NgForm) {
     form.reset();
@@ -54,33 +58,29 @@ export class RegistrationComponent {
 
     if (this.isLoginMode) {
       this.registrationService.signIn(email, password).subscribe({
-        next: (responseData) => {
-          console.log(responseData);
+        next: (res) => {
+          console.log(res);
           this.isLoading = false;
+          this.router.navigate(['/movies-catalog']);
+          this.resetForm(form);
         },
         error: (e) => {
           this.errorMessage = e.message;
           this.isLoading = false;
-        },
-        complete: () => {
-          this.isLoading = false;
-          this.resetForm(form);
         },
       });
     } else {
       this.isLoading = true;
       this.registrationService.signUp(email, password).subscribe({
-        next: (responseData) => {
-          console.log(responseData);
+        next: (res) => {
+          console.log(res);
           this.isLoading = false;
+          this.router.navigate(['/movies-catalog']);
+          this.resetForm(form);
         },
         error: (e) => {
           this.errorMessage = e.message;
           this.isLoading = false;
-        },
-        complete: () => {
-          this.isLoading = false;
-          this.resetForm(form);
         },
       });
     }
