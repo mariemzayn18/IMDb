@@ -45,7 +45,7 @@
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
         <app-danger-alert
           [content]="{
-            condition: errorMessage.length > 0,
+            condition: errorMessage.length != 0,
             message: errorMessage
           }"
         ></app-danger-alert>

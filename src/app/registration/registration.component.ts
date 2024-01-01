@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegistrationService } from './registration.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +15,7 @@ export class RegistrationComponent {
   isLoginMode = true;
   isLoading = false;
 
-  errorMessage: string='';
+  errorMessage: string = '';
 
   formFields = [
     {
@@ -57,8 +56,7 @@ export class RegistrationComponent {
           this.isLoading = false;
         },
         error: (e) => {
-          console.error(e);
-          this.errorMessage = 'An error occured';
+          this.errorMessage = e.message;
           this.isLoading = false;
         },
       });
