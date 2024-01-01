@@ -24,6 +24,7 @@ export class RegistrationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  //------------ Sending signin request.
   signIn(email: string, password: string) {
     return this.http
       .post<RegResponseData>(
@@ -48,6 +49,7 @@ export class RegistrationService {
       );
   }
 
+  //------------ Sending signup request.
   signUp(email: string, password: string) {
     return this.http
       .post<RegResponseData>(
@@ -72,11 +74,36 @@ export class RegistrationService {
       );
   }
 
+  //----------- Logging out, either manually or due to token's expired.
   logout() {
     this.user.next(null);
+    localStorage.clear();
     this.router.navigate(['/registration']); //to be changed to the home page ..
   }
 
+  //------------ Retrieve user's data from local storage if he was authenticated
+  retrieveUserData() {
+    const userDataString = localStorage.getItem('userData');
+
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = userDataString ? JSON.parse(userDataString) : null;
+
+    if (!userData) return;
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) this.user.next(loadedUser);
+  }
+  //------------ Authenticate user and save his data.
   private handleAuthentication(
     email: string,
     userId: string,
@@ -90,12 +117,19 @@ export class RegistrationService {
       token,
       expirationDate
     );
+
+    // publish the currently logged in user
     this.user.next(currentlyLoggedInUser);
+
+    // Save the currently logged in user data, in order not to losing them when reloading.
+    localStorage.setItem('userData', JSON.stringify(currentlyLoggedInUser));
   }
 
+  //------------ Display a meaningful error messages for the user when signup/login.
   private handleError(e: HttpErrorResponse) {
     let errorMessage = 'An error occured. Please try again.';
 
+    // when network is lost..
     if (!e.error || !e.error.error) {
       return throwError(() => new Error(errorMessage));
     }
