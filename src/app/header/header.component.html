@@ -11,11 +11,15 @@
           <a class="nav-link" routerLink="/movies-catalog">Catalog</a>
         </li>
 
-        <li class="nav-item" *ngIf="isLoggedIn">
+        <li class="nav-item" *ngIf="isDataLoaded && isLoggedIn">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
 
-        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          *ngIf="isDataLoaded && !isLoggedIn"
+        >
           <a class="nav-link" routerLink="/registration">Login</a>
         </li>
       </ul>

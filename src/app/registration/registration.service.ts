@@ -21,6 +21,9 @@ interface RegResponseData {
 })
 export class RegistrationService {
   user = new BehaviorSubject<User | null>(null);
+  private tokenExpirationTimer: any;
+
+  isDataLoaded = false; // Track the loading status
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -77,8 +80,20 @@ export class RegistrationService {
   //----------- Logging out, either manually or due to token's expired.
   logout() {
     this.user.next(null);
-    localStorage.clear();
+    this.isDataLoaded = false;
+
     this.router.navigate(['/registration']); //to be changed to the home page ..
+    localStorage.removeItem('userData');
+
+    // clear timer if any.
+    if (this.tokenExpirationTimer) clearTimeout(this.tokenExpirationTimer);
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDate: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDate);
   }
 
   //------------ Retrieve user's data from local storage if he was authenticated
@@ -101,7 +116,15 @@ export class RegistrationService {
       new Date(userData._tokenExpirationDate)
     );
 
-    if (loadedUser.token) this.user.next(loadedUser);
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      this.isDataLoaded = true;
+
+      // call autoLogout method to logout the user when his token expires.
+      this.autoLogout(
+        new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+      );
+    }
   }
   //------------ Authenticate user and save his data.
   private handleAuthentication(
@@ -119,7 +142,11 @@ export class RegistrationService {
     );
 
     // publish the currently logged in user
+    this.isDataLoaded = true;
     this.user.next(currentlyLoggedInUser);
+
+    // call autoLogout method to logout the user when his token expires.
+    this.autoLogout(expiresIn * 1000);
 
     // Save the currently logged in user data, in order not to losing them when reloading.
     localStorage.setItem('userData', JSON.stringify(currentlyLoggedInUser));

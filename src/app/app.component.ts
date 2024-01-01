@@ -9,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'IMDb';
 
+  isDataLoaded = false; // Track the loading status
+
   constructor(private registrationService: RegistrationService) {}
 
   ngOnInit() {
     this.registrationService.retrieveUserData();
+    this.isDataLoaded = this.registrationService.isDataLoaded;
   }
 }
