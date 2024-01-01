@@ -23,12 +23,12 @@
               #currentField="ngModel"
               [email]="field.name === 'email'"
             />
-            <div
-              class="help-block alert alert-danger small mt-2 p-2"
-              *ngIf="!currentField.valid && currentField.touched"
-            >
-              {{ field.errorMessage }}
-            </div>
+            <app-danger-alert
+              [content]="{
+                condition: !currentField.valid && currentField.touched,
+                message: field.errorMessage
+              }"
+            ></app-danger-alert>
           </div>
         </div>
         <div class="row pb-4">
@@ -43,6 +43,13 @@
           </div>
         </div>
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+        <app-danger-alert
+          [content]="{
+            condition: errorMessage.length > 0,
+            message: errorMessage
+          }"
+        ></app-danger-alert>
+
         <hr />
 
         <div class="row text-center">

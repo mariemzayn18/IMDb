@@ -16,6 +16,8 @@ export class RegistrationComponent {
   isLoginMode = true;
   isLoading = false;
 
+  errorMessage: string='';
+
   formFields = [
     {
       label: 'Email',
@@ -56,6 +58,7 @@ export class RegistrationComponent {
         },
         error: (e) => {
           console.error(e);
+          this.errorMessage = 'An error occured';
           this.isLoading = false;
         },
       });
