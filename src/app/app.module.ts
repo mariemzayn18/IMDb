@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MoviesCatalogComponent } from './movies-catalog/movies-catalog.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MoviesCatalogComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    MovieDetailsComponent,
+    LoadingSpinnerComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [
-    provideClientHydration()
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [provideClientHydration()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
