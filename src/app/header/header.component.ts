@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { RegistrationService } from './../registration/registration.service';
+import { AuthService } from './../auth/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
@@ -11,16 +11,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   private userSubscriber: Subscription = new Subscription();
 
-  constructor(public registrationService: RegistrationService) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
-    this.userSubscriber = this.registrationService.user.subscribe((user) => {
+    this.userSubscriber = this.authService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
     });
   }
 
   logout() {
-    this.registrationService.logout();
+    this.authService.logout();
   }
 
   ngOnDestroy() {

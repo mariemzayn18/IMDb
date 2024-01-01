@@ -1,4 +1,4 @@
-import { RegistrationService } from './registration/registration.service';
+import { AuthService } from './auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'IMDb';
 
-  constructor(private registrationService: RegistrationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.registrationService.retrieveUserData();
+    this.authService.retrieveUserData();
   }
 }

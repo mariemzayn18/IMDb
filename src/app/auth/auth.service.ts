@@ -19,7 +19,7 @@ interface RegResponseData {
 @Injectable({
   providedIn: 'root',
 })
-export class RegistrationService {
+export class AuthService {
   user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
 
@@ -79,7 +79,7 @@ export class RegistrationService {
   logout() {
     this.user.next(null);
 
-    this.router.navigate(['/registration']); //to be changed to the home page ..
+    this.router.navigate(['/auth']); //to be changed to the home page ..
     localStorage.removeItem('userData');
 
     // clear timer if any.

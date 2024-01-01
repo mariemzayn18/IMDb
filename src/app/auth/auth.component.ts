@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { RegistrationService } from './registration.service';
+import { AuthService } from './auth.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css',
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrl: './auth.component.css',
 })
-export class RegistrationComponent {
+export class AuthComponent {
   title = 'Sign in';
   newOrHavingAccount = 'New to IMDb?';
   switchButtonText = 'Create your IMDb account';
@@ -38,10 +38,7 @@ export class RegistrationComponent {
     },
   ];
 
-  constructor(
-    private registrationService: RegistrationService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   resetForm(form: NgForm) {
     form.reset();
@@ -57,7 +54,7 @@ export class RegistrationComponent {
     const password = form.value.password;
 
     if (this.isLoginMode) {
-      this.registrationService.signIn(email, password).subscribe({
+      this.authService.signIn(email, password).subscribe({
         next: (res) => {
           console.log(res);
           this.isLoading = false;
@@ -71,7 +68,7 @@ export class RegistrationComponent {
       });
     } else {
       this.isLoading = true;
-      this.registrationService.signUp(email, password).subscribe({
+      this.authService.signUp(email, password).subscribe({
         next: (res) => {
           console.log(res);
           this.isLoading = false;
