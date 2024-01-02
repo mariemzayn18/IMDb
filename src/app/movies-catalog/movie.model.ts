@@ -2,28 +2,29 @@ import { environment } from '../../environments/environment.development';
 
 export class Movie {
   constructor(
-    private poster_path: string,
-    private original_title: string,
-    private vote_average: string, //rating
+    private posterPath: string,
     private id: number,
-    public release_date: string,
+    public movieTitle: string,
+    public movieRating: number,
+    public releaseDate: string,
     public overview: string,
-    public genre_ids: string[]
+    public genreIds: string[],
+    private _ratingColor?: string
   ) {}
 
   get moviePoster() {
-    return environment.movieBaseImageUrl + this.poster_path;
-  }
-
-  get movieRating() {
-    return this.vote_average;
-  }
-
-  get movieTitle() {
-    return this.original_title;
+    return environment.movieBaseImageUrl + this.posterPath;
   }
 
   get movieId() {
     return this.id;
+  }
+
+  get ratingColor() {
+    return this.movieRating >= 8
+      ? 'green'
+      : this.movieRating >= 5
+      ? 'orange'
+      : 'red';
   }
 }

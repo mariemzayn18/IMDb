@@ -40,7 +40,7 @@ export class MoviesService {
       );
   }
 
-  fetchMovieActors(movieId: number) {
+  fetchMovieCast(movieId: number) {
     return this.http
       .get(
         environment.movieDBBaseUrl +
