@@ -34,4 +34,8 @@ export class MoviesCatalogComponent {
       },
     });
   }
+
+  showDetails(movie: Movie) {
+    console.log(movie);
+  }
 }

@@ -1,16 +1,24 @@
 <div class="container-fluid">
   <div class="row pt-4">
     <div
-      class="col-12 col-sm-4 col-md-4 mb-5 px-4"
+      class="col-12 col-sm-6 col-md-4 mb-5 px-4"
       *ngFor="let movie of moviesList"
     >
-      <div class="card rounded-0">
+      <div
+        class="card bg-light rounded-4 w-100 card-animation"
+        (click)="showDetails(movie)"
+      >
         <div class="card-image-top">
-          <img class="w-100" [src]="movie.moviePoster" [alt]="movie.title" />
+          <div class="image-wrapper">
+            <img
+              class="rounded-top-4 img-fluid rounded-top-4"
+              [src]="movie.moviePoster"
+              [alt]="movie.title"
+            />
+          </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title text-light">{{ movie.title }}</h5>
-          <a class="btn">Movie Details</a>
+          <h5 class="card-title">{{ movie.title }}</h5>
         </div>
       </div>
     </div>
