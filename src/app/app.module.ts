@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MoviesCatalogComponent } from './movies-catalog/movies-catalog.component';
 import { AuthComponent } from './auth/auth.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieDetailsComponent } from './movies-catalog/movie-details/movie-details.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { DangerAlertComponent } from './shared/danger-alert/danger-alert.component';
 import { HomePageComponent } from './home-page/home-page.component';

@@ -1,1 +1,14 @@
-<p>movies-catalog works!</p>
+<div class="container-fluid bg-black">
+  <div class="row">
+    <div class="col-12 col-sm-4 col-md-3" *ngFor="let movie of moviesList">
+      <div class="card movieCard w-100 h-100 rounded-0">
+        <div class="card-image-top"></div>
+        <div class="card-body">
+          <h4 class="card-title text-light"></h4>
+          <p class="card-text text-light"></p>
+          <a class="btn btn-primary">Movie Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
