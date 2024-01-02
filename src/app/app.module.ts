@@ -18,7 +18,7 @@ import { DangerAlertComponent } from './shared/danger-alert/danger-alert.compone
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { MoviesComponent } from './movies/movies.component';
-import { TopRatedMoviesCatalogComponent } from './movies/top-rated-movies-catalog/top-rated-movies-catalog.component';
+import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movies-catalog.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { MovieDetailsComponent } from './movies/movie-details/movie-details.comp
     DangerAlertComponent,
     HomePageComponent,
     MoviesComponent,
-    TopRatedMoviesCatalogComponent,
+    TopMoviesCatalogComponent,
     MovieDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],

@@ -1,3 +1,4 @@
+import { MoviesResolver } from './movies/movies-resolver.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
@@ -6,7 +7,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 import { MoviesComponent } from './movies/movies.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
-import { TopRatedMoviesCatalogComponent } from './movies/top-rated-movies-catalog/top-rated-movies-catalog.component';
+import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movies-catalog.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -17,10 +18,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'top-rated-movies-catalog',
-        component: TopRatedMoviesCatalogComponent,
+        path: 'top-movies-catalog',
+        component: TopMoviesCatalogComponent,
+        resolve: [MoviesResolver],
       },
-      { path: ':id/:name', component: MovieDetailsComponent },
+      {
+        path: ':id/:name',
+        component: MovieDetailsComponent,
+        resolve: [MoviesResolver],
+      },
     ],
   },
   { path: '**', redirectTo: '/' },

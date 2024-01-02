@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, exhaustMap } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { AuthResponseData } from './auth.service';
@@ -40,7 +40,10 @@ export class AuthComponent {
     },
   ];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   resetForm(form: NgForm) {
     form.reset();
@@ -65,9 +68,9 @@ export class AuthComponent {
     }
 
     authObs.subscribe({
-      next: (res) => {
+      next: () => {
         this.isLoading = false;
-        this.router.navigate(['/movies/top-rated-movies-catalog']);
+        this.router.navigate(['/movies/top-movies-catalog']);
         this.resetForm(form);
       },
       error: (e) => {
