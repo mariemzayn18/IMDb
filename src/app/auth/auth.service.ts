@@ -6,7 +6,7 @@ import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 
-interface RegResponseData {
+export interface AuthResponseData {
   kind: string;
   idToken: string;
   email: string;
@@ -28,7 +28,7 @@ export class AuthService {
   //------------ Sending signin request.
   signIn(email: string, password: string) {
     return this.http
-      .post<RegResponseData>(
+      .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
           environment.firebaseAPIKey,
         {
@@ -53,7 +53,7 @@ export class AuthService {
   //------------ Sending signup request.
   signUp(email: string, password: string) {
     return this.http
-      .post<RegResponseData>(
+      .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
           environment.firebaseAPIKey,
         {

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
+import { AuthResponseData } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -53,35 +55,26 @@ export class AuthComponent {
     const email = form.value.email;
     const password = form.value.password;
 
+    let authObs: Observable<AuthResponseData>;
+    this.isLoading = true;
+
     if (this.isLoginMode) {
-      this.isLoading = true;
-      this.authService.signIn(email, password).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLoading = false;
-          this.router.navigate(['/movies/top-rated-movies-catalog']);
-          this.resetForm(form);
-        },
-        error: (e) => {
-          this.errorMessage = e.message;
-          this.isLoading = false;
-        },
-      });
+      authObs = this.authService.signIn(email, password);
     } else {
-      this.isLoading = true;
-      this.authService.signUp(email, password).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLoading = false;
-          this.router.navigate(['/movies/top-rated-movies-catalog']);
-          this.resetForm(form);
-        },
-        error: (e) => {
-          this.errorMessage = e.message;
-          this.isLoading = false;
-        },
-      });
+      authObs = this.authService.signUp(email, password);
     }
+
+    authObs.subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.router.navigate(['/movies/top-rated-movies-catalog']);
+        this.resetForm(form);
+      },
+      error: (e) => {
+        this.errorMessage = e.message;
+        this.isLoading = false;
+      },
+    });
   }
 
   switchButtons(form: NgForm) {
