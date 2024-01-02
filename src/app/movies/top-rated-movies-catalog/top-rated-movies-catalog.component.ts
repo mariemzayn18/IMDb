@@ -37,6 +37,6 @@ export class TopRatedMoviesCatalogComponent {
   }
 
   showDetails(movie: Movie) {
-    this.router.navigate(['/movie', movie.movieId, movie.title]);
+    this.router.navigate(['/movies', movie.id, movie.title]);
   }
 }

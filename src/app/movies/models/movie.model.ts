@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment.development';
 export class Movie {
   constructor(
     private posterPath: string,
-    private id: number,
+    public id: number,
     public title: string,
     public rating: number,
     public releaseDate: string,
@@ -14,10 +14,6 @@ export class Movie {
 
   get moviePoster() {
     return environment.movieBaseImageUrl + this.posterPath;
-  }
-
-  get movieId() {
-    return this.id;
   }
 
   get ratingColor() {
