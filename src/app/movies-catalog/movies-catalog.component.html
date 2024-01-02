@@ -1,12 +1,16 @@
-<div class="container-fluid bg-black">
-  <div class="row">
-    <div class="col-12 col-sm-4 col-md-3" *ngFor="let movie of moviesList">
-      <div class="card movieCard w-100 h-100 rounded-0">
-        <div class="card-image-top"></div>
+<div class="container-fluid">
+  <div class="row pt-4">
+    <div
+      class="col-12 col-sm-4 col-md-4 mb-5 px-4"
+      *ngFor="let movie of moviesList"
+    >
+      <div class="card rounded-0">
+        <div class="card-image-top">
+          <img class="w-100" [src]="movie.moviePoster" [alt]="movie.title" />
+        </div>
         <div class="card-body">
-          <h4 class="card-title text-light"></h4>
-          <p class="card-text text-light"></p>
-          <a class="btn btn-primary">Movie Details</a>
+          <h5 class="card-title text-light">{{ movie.title }}</h5>
+          <a class="btn">Movie Details</a>
         </div>
       </div>
     </div>

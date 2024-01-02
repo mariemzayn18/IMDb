@@ -4,8 +4,8 @@ export class Movie {
   constructor(
     private posterPath: string,
     private id: number,
-    public movieTitle: string,
-    public movieRating: number,
+    public title: string,
+    public rating: number,
     public releaseDate: string,
     public overview: string,
     public genreIds: string[],
@@ -21,9 +21,9 @@ export class Movie {
   }
 
   get ratingColor() {
-    return this.movieRating >= 8
+    return this.rating >= 8
       ? 'green'
-      : this.movieRating >= 5
+      : this.rating >= 5
       ? 'orange'
       : 'red';
   }
