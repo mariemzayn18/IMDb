@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { MoviesService } from './movies.service';
-import { Movie } from './movie.model';
+import { MoviesService } from '../movies.service';
+import { Movie } from '../models/movie.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-movies-catalog',
-  templateUrl: './movies-catalog.component.html',
-  styleUrl: './movies-catalog.component.css',
+  selector: 'app-top-rated-movies-catalog',
+  templateUrl: './top-rated-movies-catalog.component.html',
+  styleUrl: './top-rated-movies-catalog.component.css',
 })
-export class MoviesCatalogComponent {
+export class TopRatedMoviesCatalogComponent {
   moviesList: Movie[] = [];
 
   constructor(private moviesService: MoviesService, private router: Router) {}

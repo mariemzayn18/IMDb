@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs';
-import { Movie } from './movie.model';
-import { Genres } from './genres.interface';
+import { Movie } from './models/movie.model';
+import { Genres } from './models/genres.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +25,8 @@ export class MoviesService {
         })
       );
   }
+
+  getMovieDetails(movieId: number) {}
 
   fetchMovieGenres() {
     return this.http

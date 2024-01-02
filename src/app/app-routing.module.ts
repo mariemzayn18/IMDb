@@ -1,24 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
-import { MoviesCatalogComponent } from './movies-catalog/movies-catalog.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MovieDetailsComponent } from './movies-catalog/movie-details/movie-details.component';
+
+import { MoviesComponent } from './movies/movies.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { TopRatedMoviesCatalogComponent } from './movies/top-rated-movies-catalog/top-rated-movies-catalog.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  {
-    path: 'movies-catalog',
-    component: MoviesCatalogComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'movie/:id/:name',
-    component: MovieDetailsComponent,
-    canActivate: [AuthGuard],
-  },
   { path: 'auth', component: AuthComponent },
+  {
+    path: 'movies',
+    component: MoviesComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'top-rated-movies-catalog',
+        component: TopRatedMoviesCatalogComponent,
+      },
+      { path: ':id/:name', component: MovieDetailsComponent },
+    ],
+  },
   { path: '**', redirectTo: '/' },
 ];
 

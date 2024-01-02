@@ -59,7 +59,7 @@ export class AuthComponent {
         next: (res) => {
           console.log(res);
           this.isLoading = false;
-          this.router.navigate(['/movies-catalog']);
+          this.router.navigate(['/top-rated-movies-catalog']);
           this.resetForm(form);
         },
         error: (e) => {
@@ -73,7 +73,7 @@ export class AuthComponent {
         next: (res) => {
           console.log(res);
           this.isLoading = false;
-          this.router.navigate(['/movies-catalog']);
+          this.router.navigate(['/top-rated-movies-catalog']);
           this.resetForm(form);
         },
         error: (e) => {

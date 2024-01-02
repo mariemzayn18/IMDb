@@ -1,4 +1,4 @@
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 
 export class Movie {
   constructor(
@@ -21,10 +21,6 @@ export class Movie {
   }
 
   get ratingColor() {
-    return this.rating >= 8
-      ? 'green'
-      : this.rating >= 5
-      ? 'orange'
-      : 'red';
+    return this.rating >= 8 ? 'green' : this.rating >= 5 ? 'orange' : 'red';
   }
 }
