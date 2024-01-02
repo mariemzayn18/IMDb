@@ -22,6 +22,7 @@
               required
               #currentField="ngModel"
               [email]="field.name === 'email'"
+              [minlength]="field.name === 'password' ? 6 : null"
             />
             <app-danger-alert
               [content]="{

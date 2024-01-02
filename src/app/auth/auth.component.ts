@@ -34,7 +34,7 @@ export class AuthComponent {
       type: 'password',
       valid: false,
       touched: false,
-      errorMessage: 'Missing password!',
+      errorMessage: 'Password should be at least 6 characters!',
     },
   ];
 
