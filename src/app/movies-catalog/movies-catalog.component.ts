@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MoviesService } from './movies.service';
 import { Movie } from './movie.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies-catalog',
@@ -10,7 +11,7 @@ import { Movie } from './movie.model';
 export class MoviesCatalogComponent {
   moviesList: Movie[] = [];
 
-  constructor(private moviesService: MoviesService) {}
+  constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit() {
     this.fetchTopMovies();
@@ -36,6 +37,6 @@ export class MoviesCatalogComponent {
   }
 
   showDetails(movie: Movie) {
-    console.log(movie);
+    this.router.navigate(['/movie', movie.movieId, movie.title]);
   }
 }

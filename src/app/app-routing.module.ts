@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { MoviesCatalogComponent } from './movies-catalog/movies-catalog.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { AuthGuard } from './auth/auth.guard';
+import { MovieDetailsComponent } from './movies-catalog/movie-details/movie-details.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -12,7 +13,13 @@ const routes: Routes = [
     component: MoviesCatalogComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'movie/:id/:name',
+    component: MovieDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'auth', component: AuthComponent },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({
