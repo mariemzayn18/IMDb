@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div
+    class="row movieRow p-5"
+    [style]="{ backgroundImage: 'url(' + movie.movieBackdrop + ')' }"
+  >
+    <div class="col-4">
+      <div class="image-wrapper p-md-5">
+        <img [src]="movie.moviePoster" [alt]="movie.title" />
+      </div>
+    </div>
+    <div class="col d-flex align-items-center">
+      <h1 class="card-title text-light">{{ movie.title }}</h1>
+    </div>
+  </div>
+</div>

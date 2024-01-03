@@ -9,6 +9,8 @@ import { Movie } from '../models/movie.model';
   styleUrl: './movie-details.component.css',
 })
 export class MovieDetailsComponent {
+  movie: Movie = {} as Movie;
+
   constructor(
     private moviesService: MoviesService,
     private router: ActivatedRoute
@@ -16,6 +18,6 @@ export class MovieDetailsComponent {
 
   ngOnInit() {
     const movieId = +this.router.snapshot.params['id'];
-    const movie = this.moviesService.getMovieDetails(movieId);
+    this.movie = this.moviesService.getMovieDetails(movieId);
   }
 }

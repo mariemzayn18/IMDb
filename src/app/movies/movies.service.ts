@@ -22,7 +22,11 @@ export class MoviesService {
   }
 
   getMovieDetails(movieId: number) {
-    return this.topMovies.find((movie) => movie.id === movieId);
+    const movie = this.topMovies.find((movie) => movie.id === movieId);
+    if (movie) {
+      return movie;
+    }
+    return {} as Movie;
   }
 
   //------------ Genres
