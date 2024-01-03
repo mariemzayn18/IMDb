@@ -14,8 +14,9 @@ import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
 import { MoviesService } from './../services/movies.service';
 import { MoviesStorageService } from '../../shared/movies-storage.service';
 import { expectedMovies } from '../../mock-data/movies';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { expectedGenres } from '../../mock-data/genres';
 
 describe('TopMoviesCatalogComponent', () => {
   let component: TopMoviesCatalogComponent;
@@ -49,22 +50,23 @@ describe('TopMoviesCatalogComponent', () => {
     expect(compiled.querySelector('h1').textContent).toEqual(component.title);
   });
 
-  xit('should use the movies from the movies service', () => {
-    // check that there's data after the service fetches it
+  xit('should fetch top movies before rendering', fakeAsync(() => {
+    // Arrange
     spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
-      of(expectedMovies)
+      of(expectedMovies).pipe(
+        tap((data) => {
+          moviesService.setTopMovies(data);
+        })
+      )
     );
-    const url =
-      environment.movieDBBaseUrl +
-      'movie/top_rated?api_key=' +
-      environment.movieDBAPIKey;
 
-    const req = httpTestingController.expectOne(url);
-    expect(req.request.method).toEqual('GET');
+    // Act
+    fixture.detectChanges(); // Trigger change detection
+    tick(); // Simulate the passage of time for async operations
 
-    req.flush(expectedMovies); //mock the response
-    component.ngOnInit();
-    // expect(component.moviesList).toEqual(moviesService.movies);
-    // expect(component.moviesList.length).toBeGreaterThan(0);
-  });
+    // Assert
+    expect(moviesStorageService.fetchTopMovies).toHaveBeenCalled();
+    expect(component.moviesList).toEqual(expectedMovies);
+    expect(component.moviesList.length).toBeGreaterThan(0);
+  }));
 });

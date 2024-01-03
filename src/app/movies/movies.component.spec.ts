@@ -64,10 +64,16 @@ describe('MoviesComponent', () => {
     component.ngOnInit();
     tick();
 
+    // check if the methods are called
     expect(moviesStorageService.fetchMovieGenres).toHaveBeenCalled();
     expect(moviesStorageService.fetchTopMovies).toHaveBeenCalled();
 
+    // check if the data is set correctly in the service
     expect(moviesService.genres.length).toEqual(expectedGenres.length);
     expect(moviesService.movies.length).toEqual(expectedMovies.length);
+
+    // double check if the data is set correctly in the service
+    expect(moviesService.movies.length).toBeGreaterThan(0);
+    expect(moviesService.movies[0].title).toEqual('The Shawshank Redemption');
   }));
 });
