@@ -12,7 +12,7 @@ import { Actor } from '../models/actor.model';
 })
 export class MovieDetailsComponent {
   movie: Movie = {} as Movie;
-  actors: Actor[] = {} as Actor[];
+  actors: Actor[] = [];
 
   movieYear: number = 0;
 

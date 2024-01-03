@@ -7,5 +7,5 @@ import { Actor } from '../../models/actor.model';
   styleUrl: './actors-cards.component.css',
 })
 export class ActorsCardsComponent {
-  @Input() actors: Actor[] = {} as Actor[];
+  @Input() actors: Actor[] = [];
 }

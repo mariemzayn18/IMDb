@@ -10,7 +10,7 @@ export class MoviesService {
   private movieGenres: Genre[] = [];
 
   public currentMovieActors: Actor[] = [];
-  public currentMovieId: number = 0;
+  public currentMovieId: number = 83;
 
   constructor(private http: HttpClient) {}
 

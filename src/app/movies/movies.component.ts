@@ -11,8 +11,6 @@ export class MoviesComponent implements OnInit {
   constructor(private moviesStorageService: MoviesStorageService) {}
 
   ngOnInit() {
-    // this.moviesStorageService.fetchMovieGenres().subscribe();
-    // this.moviesStorageService.fetchTopMovies().subscribe();
     this.moviesStorageService
       .fetchMovieGenres()
       .pipe(
