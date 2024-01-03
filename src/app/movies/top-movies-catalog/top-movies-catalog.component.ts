@@ -9,6 +9,7 @@ import { MoviesService } from '../services/movies.service';
   styleUrl: './top-movies-catalog.component.css',
 })
 export class TopMoviesCatalogComponent {
+  title = 'Top-Rated Movies';
   moviesList: Movie[] = [];
   p = 1; // Current page
 

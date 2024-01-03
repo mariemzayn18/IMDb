@@ -1,4 +1,4 @@
-import { exhaustMap, take } from 'rxjs';
+import { exhaustMap } from 'rxjs';
 import { MoviesStorageService } from './../shared/movies-storage.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -19,5 +19,9 @@ export class MoviesComponent implements OnInit {
         })
       )
       .subscribe();
+
+    // this.moviesStorageService.fetchMovieGenres().subscribe(() => {
+    //   this.moviesStorageService.fetchTopMovies().subscribe(() => {});
+    // });
   }
 }
