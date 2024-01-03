@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-// import { MoviesService } from '../movies.service';
-import { Movie } from '../models/movie.model';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { MoviesService } from '../movies.service';
 })
 export class TopMoviesCatalogComponent {
   moviesList: Movie[] = [];
+  p = 1; // Current page
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 

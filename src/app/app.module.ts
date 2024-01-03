@@ -20,6 +20,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { MoviesComponent } from './movies/movies.component';
 import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movies-catalog.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,13 @@ import { MovieDetailsComponent } from './movies/movie-details/movie-details.comp
     TopMoviesCatalogComponent,
     MovieDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
+  ],
   providers: [
     provideClientHydration(),
     {

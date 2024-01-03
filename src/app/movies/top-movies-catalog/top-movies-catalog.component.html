@@ -2,7 +2,9 @@
   <div class="row pt-4">
     <div
       class="col-12 col-sm-6 col-md-3 mb-5 px-4"
-      *ngFor="let movie of moviesList"
+      *ngFor="
+        let movie of moviesList | paginate : { itemsPerPage: 8, currentPage: p }
+      "
     >
       <div
         class="card bg-light rounded-4 w-100 h-100 card-animation"
@@ -28,6 +30,11 @@
           </p>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-end">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>
