@@ -16,6 +16,7 @@ export class TopMoviesCatalogComponent {
 
   ngOnInit() {
     this.moviesList = this.moviesService.movies;
+    this.moviesList.pop();
   }
 
   showDetails(movie: Movie) {

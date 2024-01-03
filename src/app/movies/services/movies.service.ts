@@ -20,7 +20,6 @@ export class MoviesService {
   }
 
   get movies() {
-    this.topMovies.pop();
     return this.topMovies.slice();
   }
 
