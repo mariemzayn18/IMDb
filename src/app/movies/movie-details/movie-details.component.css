@@ -1,6 +1,7 @@
-.container-fluid {
+.basicDetails {
   background: linear-gradient(to bottom, #565e5a, #333d47, #404040);
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  min-width: 100vw;
 }
 
 .movieRow {

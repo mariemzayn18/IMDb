@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs';
 import { Movie } from '../movies/models/movie.model';
 import { Genre } from '../movies/models/genre.model';
 import { MoviesService } from '../movies/movies.service';
+import { Actor } from '../movies/models/actor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,6 +64,36 @@ export class MoviesStorageService {
         tap((movies: Movie[]) => {
           this.moviesService.setTopMovies(movies);
           this.moviesService.mapGenresIds();
+        })
+      );
+  }
+
+  fetchMovieActors(movieId: number) {
+    return this.http
+      .get(
+        environment.movieDBBaseUrl +
+          'movie/' +
+          movieId +
+          '/credits?api_key=' +
+          environment.movieDBAPIKey
+      )
+      .pipe(
+        map((res: any) => {
+          if (res.cast) {
+            return res.cast.map(
+              (actor: any) =>
+                new Actor(
+                  actor.id,
+                  actor.character,
+                  actor.name,
+                  actor.profile_path
+                )
+            );
+          }
+          return res.cast;
+        }),
+        tap((actor: any) => {
+          this.moviesService.setMovieActors(actor);
         })
       );
   }
