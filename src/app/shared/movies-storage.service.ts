@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { map, tap } from 'rxjs';
 import { Movie } from '../movies/models/movie.model';
 import { Genre } from '../movies/models/genre.model';
-import { MoviesService } from '../movies/movies.service';
+import { MoviesService } from '../movies/services/movies.service';
 import { Actor } from '../movies/models/actor.model';
 
 @Injectable({

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
-import { MoviesService } from '../movies.service';
-import { MoviesStorageService } from '../../shared/movies-storage.service';
+import { MoviesService } from '../services/movies.service';
 
 @Component({
   selector: 'app-top-movies-catalog',
@@ -16,11 +15,10 @@ export class TopMoviesCatalogComponent {
   constructor(
     private moviesService: MoviesService,
     private router: Router,
-    private moviesStorageService: MoviesStorageService
   ) {}
 
   ngOnInit() {
-    this.moviesList = this.moviesService.movies;   
+    this.moviesList = this.moviesService.movies;
   }
 
   showDetails(movie: Movie) {

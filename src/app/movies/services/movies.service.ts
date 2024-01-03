@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Movie } from './models/movie.model';
-import { Genre } from './models/genre.model';
-import { Actor } from './models/actor.model';
+import { Movie } from '../models/movie.model';
+import { Genre } from '../models/genre.model';
+import { Actor } from '../models/actor.model';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
@@ -10,7 +10,7 @@ export class MoviesService {
   private movieGenres: Genre[] = [];
 
   public currentMovieActors: Actor[] = [];
-  public currentMovieId: number=0;
+  public currentMovieId: number = 0;
 
   constructor(private http: HttpClient) {}
 
