@@ -57,4 +57,14 @@ describe('TopMoviesCatalogComponent', () => {
       moviesService.movies.length - 1
     );
   });
+
+  it('should have movies cards rendered correctly', () => {
+    moviesService.setTopMovies(expectedMovies);
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const compiled = fixture.debugElement.nativeElement;
+    const movieCards = compiled.querySelectorAll('.card');
+    expect(movieCards.length).toEqual(component.moviesList.length);
+  });
 });
