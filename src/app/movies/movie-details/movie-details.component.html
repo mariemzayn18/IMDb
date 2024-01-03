@@ -1,15 +1,34 @@
-<div class="container-fluid">
+<div class="container-fluid text-light h-100">
+  <div class="row mx-5 py-4">
+    <h1>
+      {{ movie.title }}
+      <span class="text-light h6">
+        ({{ movie.releaseDate | date : "longDate" }})
+      </span>
+    </h1>
+  </div>
   <div
-    class="row movieRow p-5"
+    class="row movieRow p-5 mx-5 rounded-1"
     [style]="{ backgroundImage: 'url(' + movie.movieBackdrop + ')' }"
   >
     <div class="col-4">
-      <div class="image-wrapper p-md-5">
+      <div class="image-wrapper p-md-4">
         <img [src]="movie.moviePoster" [alt]="movie.title" />
       </div>
     </div>
-    <div class="col d-flex align-items-center">
-      <h1 class="card-title text-light">{{ movie.title }}</h1>
+  </div>
+  <div class="row mx-5 pt-3">
+    <div class="col d-flex justify-content-start flex-wrap">
+      <h5 *ngFor="let genre of movie.genre">
+        <span class="badge bg-secondary me-2 mb-2">{{ genre }}</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="row mx-5 py-4">
+    <div class="col-12">
+      <h2>Overview</h2>
+      <p>{{ movie.overview }}</p>
     </div>
   </div>
 </div>
