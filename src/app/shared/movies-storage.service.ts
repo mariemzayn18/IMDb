@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { map, tap } from 'rxjs';
 import { Movie } from '../movies/models/movie.model';
-import { Genres } from '../movies/models/genres.model';
+import { Genre } from '../movies/models/genre.model';
 import { MoviesService } from '../movies/movies.service';
 
 @Injectable({
@@ -11,6 +11,28 @@ import { MoviesService } from '../movies/movies.service';
 })
 export class MoviesStorageService {
   constructor(private http: HttpClient, private moviesService: MoviesService) {}
+
+  fetchMovieGenres() {
+    return this.http
+      .get<Genre[]>(
+        environment.movieDBBaseUrl +
+          'genre/movie/list?api_key=' +
+          environment.movieDBAPIKey
+      )
+      .pipe(
+        map((res: any) => {
+          if (res.genres) {
+            return res.genres.map(
+              (genre: any) => new Genre(genre.id, genre.name)
+            );
+          }
+          return res.genre;
+        }),
+        tap((genre) => {
+          this.moviesService.setMovieGenres(genre);
+        })
+      );
+  }
 
   fetchTopMovies() {
     return this.http
@@ -40,20 +62,7 @@ export class MoviesStorageService {
         }),
         tap((movies: Movie[]) => {
           this.moviesService.setTopMovies(movies);
-        })
-      );
-  }
-
-  fetchMovieGenres() {
-    return this.http
-      .get<Genres[]>(
-        environment.movieDBBaseUrl +
-          'genre/movie/list?api_key=' +
-          environment.movieDBAPIKey
-      )
-      .pipe(
-        map((res: any) => {
-          return res.genres;
+          this.moviesService.mapGenresIds();
         })
       );
   }

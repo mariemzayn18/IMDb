@@ -9,7 +9,7 @@ export class Movie {
     public rating: number,
     public releaseDate: Date,
     public overview: string,
-    public genreIds: string[],
+    public genre: string[],
     private _ratingColor?: string
   ) {}
 
