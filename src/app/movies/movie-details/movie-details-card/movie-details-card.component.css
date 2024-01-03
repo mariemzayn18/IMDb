@@ -1,0 +1,52 @@
+.basicDetails {
+  background: linear-gradient(to bottom, #565e5a, #333d47, #404040);
+  /* min-height: 100vh; */
+  min-width: 100vw;
+}
+
+.movieRow {
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.movieRow:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000050;
+  z-index: 0;
+}
+.movieYear,
+.overview {
+  color: #ffffffb6;
+}
+.overview {
+  text-align: justify;
+}
+
+.image-wrapper {
+  background-color: #ffffff80;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.text-light {
+  z-index: 1;
+}
+
+.badge {
+  font-weight: 800;
+}
+
+@media screen and (max-width: 700px) {
+  img {
+    border-radius: 15px;
+  }
+}

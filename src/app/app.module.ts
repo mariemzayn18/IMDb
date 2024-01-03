@@ -22,6 +22,7 @@ import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movie
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ActorsCardsComponent } from './movies/movie-details/actors-cards/actors-cards.component';
+import { MovieDetailsCardComponent } from './movies/movie-details/movie-details-card/movie-details-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { ActorsCardsComponent } from './movies/movie-details/actors-cards/actors
     TopMoviesCatalogComponent,
     MovieDetailsComponent,
     ActorsCardsComponent,
+    MovieDetailsCardComponent,
   ],
   imports: [
     BrowserModule,
