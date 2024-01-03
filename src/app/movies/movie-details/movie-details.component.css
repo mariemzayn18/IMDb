@@ -5,6 +5,7 @@
     rgba(38, 43, 73, 1) 0%,
     rgba(77, 73, 88, 1) 89%
   );
+  min-height: 100vh;
 }
 
 .movieRow {
@@ -38,7 +39,7 @@
   z-index: 1;
 }
 
-.genre{
+.genre {
   background-color: #ffffff80;
   border-radius: 5px;
   padding: 5px;
