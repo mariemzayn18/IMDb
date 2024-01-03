@@ -11,7 +11,6 @@
 .movieRow {
   background-repeat: no-repeat;
   background-size: cover;
-  backdrop-filter: blur(5px);
   position: relative;
 }
 
@@ -27,7 +26,7 @@
 }
 
 .image-wrapper {
-  background-color: #ffffff80;
+  background-color: #ffffff90;
 }
 
 .image-wrapper img {
