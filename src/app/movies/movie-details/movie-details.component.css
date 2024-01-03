@@ -1,10 +1,5 @@
 .container-fluid {
-  background: rgb(38, 43, 73);
-  background: linear-gradient(
-    101deg,
-    rgba(38, 43, 73, 1) 0%,
-    rgba(77, 73, 88, 1) 89%
-  );
+  background: linear-gradient(to bottom, #565e5a, #333d47, #404040);
   min-height: 100vh;
 }
 
@@ -24,9 +19,11 @@
   background-color: #00000050;
   z-index: 0;
 }
-
+.movieYear {
+  color: #ffffffb6;
+}
 .image-wrapper {
-  background-color: #ffffff90;
+  background-color: #ffffff80;
 }
 
 .image-wrapper img {
@@ -38,11 +35,8 @@
   z-index: 1;
 }
 
-.genre {
-  background-color: #ffffff80;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
+.badge {
+  font-weight: 800;
 }
 
 @media screen and (max-width: 700px) {

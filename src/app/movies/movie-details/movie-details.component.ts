@@ -10,6 +10,7 @@ import { Movie } from '../models/movie.model';
 })
 export class MovieDetailsComponent {
   movie: Movie = {} as Movie;
+  movieYear: number = 0;
 
   constructor(
     private moviesService: MoviesService,
@@ -19,5 +20,10 @@ export class MovieDetailsComponent {
   ngOnInit() {
     const movieId = +this.router.snapshot.params['id'];
     this.movie = this.moviesService.getMovieDetails(movieId);
+    this.movieYear = this.extractYear(this.movie.releaseDate);
+  }
+
+  extractYear(date: Date) {
+    return new Date(date).getFullYear();
   }
 }

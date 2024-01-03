@@ -1,11 +1,9 @@
 <div class="container-fluid text-light">
-  <div class="row mx-5 py-4">
+  <div class="row mx-5 py-4 text-center text-md-start">
     <h1>
       {{ movie.title }}
-      <span class="text-light h6">
-        ({{ movie.releaseDate | date : "longDate" }})
-      </span>
     </h1>
+    <h6 class="movieYear h6">Movie - {{ movieYear }}</h6>
   </div>
   <div
     class="row movieRow p-5 mx-5 rounded-1"
@@ -20,7 +18,7 @@
   <div class="row mx-5 pt-3">
     <div class="col d-flex justify-content-start flex-wrap">
       <h5 *ngFor="let genre of movie.genre">
-        <span class="badge bg-secondary me-2 mb-2">{{ genre }}</span>
+        <span class="badge bg-warning text-dark me-2 mb-2">{{ genre }}</span>
       </h5>
     </div>
   </div>
