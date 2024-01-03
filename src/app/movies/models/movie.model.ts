@@ -9,8 +9,7 @@ export class Movie {
     public rating: number,
     public releaseDate: Date,
     public overview: string,
-    public genre: string[],
-    private _ratingColor?: string
+    public genre: string[]
   ) {}
 
   get moviePoster() {
@@ -19,9 +18,5 @@ export class Movie {
 
   get movieBackdrop() {
     return environment.movieBaseImageUrl + this.backdropPath;
-  }
-
-  get ratingColor() {
-    return this.rating >= 8 ? 'green' : this.rating >= 5 ? 'orange' : 'red';
   }
 }
