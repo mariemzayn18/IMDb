@@ -12,10 +12,7 @@ export class TopMoviesCatalogComponent {
   moviesList: Movie[] = [];
   p = 1; // Current page
 
-  constructor(
-    private moviesService: MoviesService,
-    private router: Router,
-  ) {}
+  constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit() {
     this.moviesList = this.moviesService.movies;
