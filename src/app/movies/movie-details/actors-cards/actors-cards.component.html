@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row mx-5 pt-3">
+    <h1 class="text-center text-md-start">Top cast</h1>
+  </div>
+  <div class="row mx-5 pt-3">
+    <div class="col-md-4 col-12 card border-0" *ngFor="let actor of actors">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6 col-md-auto d-flex align-items-center">
+            <img
+              [src]="actor.actorImage"
+              class="rounded-circle"
+              alt="Profile picture"
+              width="96"
+              height="96"
+            />
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div>
+              <h5 class="mt-0 text-truncate">{{ actor.name }}</h5>
+              <p class="text-truncate">{{ actor.character }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
