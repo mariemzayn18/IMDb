@@ -8,7 +8,7 @@
     </div>
     <div class="col-12 col-md-6">
       <div
-        class="col d-flex justify-content-md-end justify-content-center flex-wrap"
+        class="col d-flex justify-content-md-end justify-content-center flex-wrap align-items-center h-100 mt-md-0 mt-2"
       >
         <h5 *ngFor="let genre of movie.genre">
           <span class="badge bg-warning text-dark me-2 mb-2">{{ genre }}</span>
@@ -31,7 +31,7 @@
   <div class="row mx-5 py-4">
     <div class="col-12">
       <h2>Overview</h2>
-      <p>{{ movie.overview }}</p>
+      <p class="overview">{{ movie.overview }}</p>
     </div>
   </div>
 </div>

@@ -19,9 +19,14 @@
   background-color: #00000050;
   z-index: 0;
 }
-.movieYear {
+.movieYear,
+.overview {
   color: #ffffffb6;
 }
+.overview {
+  text-align: justify;
+}
+
 .image-wrapper {
   background-color: #ffffff80;
 }
