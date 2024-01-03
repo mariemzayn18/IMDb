@@ -17,6 +17,5 @@ export class MovieDetailsComponent {
   ngOnInit() {
     const movieId = +this.router.snapshot.params['id'];
     const movie = this.moviesService.getMovieDetails(movieId);
-    console.log(movie);
   }
 }

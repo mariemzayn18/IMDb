@@ -26,10 +26,11 @@ export class MoviesStorageService {
               (movie: any) =>
                 new Movie(
                   movie.poster_path,
+                  movie.backdrop_path,
                   movie.id,
                   movie.title,
                   movie.vote_average,
-                  movie.release_date,
+                  new Date(movie.release_date),
                   movie.overview,
                   movie.genre_ids
                 )

@@ -1,12 +1,13 @@
 <div class="container-fluid">
   <div class="row pt-4">
     <div
-      class="col-12 col-sm-6 col-md-4 mb-5 px-4"
+      class="col-12 col-sm-6 col-md-3 mb-5 px-4"
       *ngFor="let movie of moviesList"
     >
       <div
-        class="card bg-light rounded-4 w-100 card-animation"
-        (click)="showDetails(movie)"
+        class="card bg-light rounded-4 w-100 h-100 card-animation"
+        data-bs-toggle="tooltip"
+        [title]="movie.title"
       >
         <div class="card-image-top">
           <div class="image-wrapper">
@@ -14,11 +15,17 @@
               class="rounded-top-4 img-fluid rounded-top-4"
               [src]="movie.moviePoster"
               [alt]="movie.title"
+              (click)="showDetails(movie)"
             />
           </div>
         </div>
         <div class="card-body">
-          <h4 class="card-title">{{ movie.title | uppercase }}</h4>
+          <h5 class="card-title" (click)="showDetails(movie)">
+            {{ movie.title }}
+          </h5>
+          <p class="text-secondary">
+            {{ movie.releaseDate | date : "mediumDate" }}
+          </p>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 .card {
   transition: transform 0.5s ease-in-out;
-  cursor: pointer;
 }
 
 .card:hover {
@@ -23,6 +22,15 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.card-title,
+.image-wrapper {
+  cursor: pointer;
+}
+
+.card-title:hover {
+  color: #08b6e5;
 }
 
 .card-animation {
