@@ -50,23 +50,11 @@ describe('TopMoviesCatalogComponent', () => {
     expect(compiled.querySelector('h1').textContent).toEqual(component.title);
   });
 
-  xit('should fetch top movies before rendering', fakeAsync(() => {
-    // Arrange
-    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
-      of(expectedMovies).pipe(
-        tap((data) => {
-          moviesService.setTopMovies(data);
-        })
-      )
+  it('should have movies list similar to that in the service', () => {
+    moviesService.setTopMovies(expectedMovies);
+    component.ngOnInit();
+    expect(component.moviesList.length).toEqual(
+      moviesService.movies.length - 1
     );
-
-    // Act
-    fixture.detectChanges(); // Trigger change detection
-    tick(); // Simulate the passage of time for async operations
-
-    // Assert
-    expect(moviesStorageService.fetchTopMovies).toHaveBeenCalled();
-    expect(component.moviesList).toEqual(expectedMovies);
-    expect(component.moviesList.length).toBeGreaterThan(0);
-  }));
+  });
 });
