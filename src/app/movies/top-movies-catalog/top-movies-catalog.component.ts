@@ -34,10 +34,8 @@ export class TopMoviesCatalogComponent {
   }
 
   fetchingMovieDetails() {
-    this.moviesStorageService.fetchMovieGenres().subscribe(() => {
-      this.moviesStorageService.fetchTopMovies(this.p).subscribe(() => {
-        this.setMovies();
-      });
+    this.moviesStorageService.fetchTopMovies(this.p).subscribe(() => {
+      this.setMovies();
     });
   }
 
