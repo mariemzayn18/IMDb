@@ -4,6 +4,12 @@
 
 @media screen and (max-width: 1000px) {
   .container {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
     width: 75%;
   }
 }

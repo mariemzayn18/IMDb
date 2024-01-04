@@ -40,10 +40,7 @@ export class AuthComponent {
     },
   ];
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   resetForm(form: NgForm) {
     form.reset();
@@ -71,7 +68,6 @@ export class AuthComponent {
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/movies/top-movies-catalog']);
-        this.resetForm(form);
       },
       error: (e) => {
         this.errorMessage = e.message;
