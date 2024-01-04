@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { catchError, map, tap, throwError } from 'rxjs';
+import { catchError, map, of, tap, throwError } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { Genre } from '../models/genre.model';
 import { MoviesService } from './movies.service';
@@ -33,7 +33,10 @@ export class MoviesStorageService {
         tap((genre) => {
           this.moviesService.setMovieGenres(genre);
         }),
-        catchError(this.handleError)
+        catchError((error: any) => {
+          this.handleError(error);
+          return of([]);
+        })
       );
   }
 
@@ -69,7 +72,10 @@ export class MoviesStorageService {
           this.moviesService.setTopMovies(movies);
           this.moviesService.mapGenresIds();
         }),
-        catchError(this.handleError)
+        catchError((error: any) => {
+          this.handleError(error);
+          return of([]);
+        })
       );
   }
 
@@ -97,16 +103,17 @@ export class MoviesStorageService {
         tap((actor: any) => {
           this.moviesService.setMovieActors(actor);
         }),
-        catchError(this.handleError)
+        catchError((error: any) => {
+          this.handleError(error);
+          return of([]);
+        })
       );
   }
 
   // Error handling
   private handleError(e: HttpErrorResponse) {
-    let errorMessage = 'An error occured. Please try again.';
-
+    let errorMessage = 'An error occurred. Please try again.';
     console.error(errorMessage);
-
     return throwError(() => new Error(errorMessage));
   }
 }

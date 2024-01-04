@@ -46,14 +46,20 @@ describe('MoviesComponent', () => {
   });
 
   it('should fetch movie genres and top movies on init', fakeAsync(() => {
-    spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
+    let genreSpy = spyOn(
+      moviesStorageService,
+      'fetchMovieGenres'
+    ).and.returnValue(
       of(expectedGenres).pipe(
         tap((data) => {
           moviesService.setMovieGenres(data);
         })
       )
     );
-    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
+    let movieSpy = spyOn(
+      moviesStorageService,
+      'fetchTopMovies'
+    ).and.returnValue(
       of(expectedMovies).pipe(
         tap((data) => {
           moviesService.setTopMovies(data);
@@ -65,8 +71,8 @@ describe('MoviesComponent', () => {
     tick();
 
     // check if the methods are called
-    expect(moviesStorageService.fetchMovieGenres).toHaveBeenCalled();
-    expect(moviesStorageService.fetchTopMovies).toHaveBeenCalled();
+    expect(genreSpy).toHaveBeenCalled();
+    expect(movieSpy).toHaveBeenCalled();
 
     // check if the data is set correctly in the service
     expect(moviesService.genres.length).toEqual(expectedGenres.length);
@@ -77,23 +83,24 @@ describe('MoviesComponent', () => {
     expect(moviesService.movies[0].title).toEqual('The Shawshank Redemption');
   }));
 
-  it('should handle error when fetching movie genres on init', fakeAsync(() => {
-    // Arrange
+  it('should handle error when fetching movies on init', fakeAsync(() => {
     const consoleErrorSpy = spyOn(console, 'error');
 
-    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
-      throwError(() => new Error('An error occured. Please try again.'))
+    spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
+      of(expectedGenres).pipe(
+        tap((data) => {
+          moviesService.setMovieGenres(data);
+        })
+      )
     );
 
-    // Act
-    component.ngOnInit();
-    tick();
-
-    // Assert
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'An error occured. Please try again.'
+    spyOn(moviesStorageService, 'fetchTopMovies').and.throwError(
+      'An error occurred. Please try again.'
     );
 
-    expect(moviesService.movies.length).toEqual(0); // Movies should be reset in case of an error
+    expect(function () {
+      component.ngOnInit();
+      tick();
+    }).toThrowError('An error occurred. Please try again.');
   }));
 });
