@@ -30,7 +30,7 @@ export class MovieDetailsComponent {
 
     // fetch actors
     this.moviesStorageService.fetchMovieActors(movieId).subscribe((actors) => {
-      this.actors = actors.slice(0, 6);
+      this.actors = actors.length > 6 ? actors.slice(0, 6) : actors;
     });
 
     // extract the release year
