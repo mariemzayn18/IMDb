@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/services/auth-guard.service';
-import { UnauthGuard } from './auth/services/unauth-guard';
+import { UnauthGuard } from './auth/services/unauth-guard.service';
 import { MoviesResolver } from './movies/services/movies-resolver.service';
 import { AuthComponent } from './auth/auth.component';
 import { HomePageComponent } from './home-page/home-page.component';
