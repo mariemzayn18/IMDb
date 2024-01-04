@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/services/auth-guard.service';
-import { TestGuard } from './auth/services/can-activate-auth-guard.service';
+import { UnauthGuard } from './auth/services/unauth-guard';
 import { MoviesResolver } from './movies/services/movies-resolver.service';
 import { AuthComponent } from './auth/auth.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -12,7 +12,7 @@ import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movie
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'auth', component: AuthComponent, canActivate: [TestGuard] },
+  { path: 'auth', component: AuthComponent, canActivate: [UnauthGuard] },
   {
     path: 'movies',
     component: MoviesComponent,
