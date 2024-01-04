@@ -1,6 +1,7 @@
 import { exhaustMap } from 'rxjs';
 import { MoviesStorageService } from './services/movies-storage.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -8,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './movies.component.css',
 })
 export class MoviesComponent implements OnInit {
-  constructor(private moviesStorageService: MoviesStorageService) {}
+  isLoading = false;
+
+  constructor(
+    private moviesStorageService: MoviesStorageService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.moviesStorageService
       .fetchMovieGenres()
       .pipe(
@@ -18,6 +25,9 @@ export class MoviesComponent implements OnInit {
           return this.moviesStorageService.fetchTopMovies();
         })
       )
-      .subscribe();
+      .subscribe(() => {
+        this.isLoading = false;
+        this.router.navigate(['/movies/top-movies-catalog']);
+      });
   }
 }

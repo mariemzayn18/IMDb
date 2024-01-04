@@ -67,7 +67,7 @@ export class AuthComponent {
     authObs.subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/movies/top-movies-catalog']);
+        this.router.navigate(['/movies']);
       },
       error: (e) => {
         this.errorMessage = e.message;
