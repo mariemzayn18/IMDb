@@ -84,7 +84,6 @@ describe('MoviesComponent', () => {
   }));
 
   it('should handle error when fetching movies on init', fakeAsync(() => {
-    const consoleErrorSpy = spyOn(console, 'error');
 
     spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
       of(expectedGenres).pipe(
@@ -102,5 +101,6 @@ describe('MoviesComponent', () => {
       component.ngOnInit();
       tick();
     }).toThrowError('An error occurred. Please try again.');
+    
   }));
 });
