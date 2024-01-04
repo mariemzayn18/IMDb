@@ -29,18 +29,15 @@ export class TopMoviesCatalogComponent {
     this.moviesList = this.moviesService.movies;
     this.moviesList.pop();
   }
+
   showDetails(movie: Movie) {
     this.router.navigate(['/movies', movie.id, movie.title]);
   }
 
-  fetchingMovieDetails() {
-    this.moviesStorageService.fetchTopMovies(this.p).subscribe(() => {
-      this.setMovies();
-    });
-  }
-
   pageChanged(page: number) {
     this.p = page;
-    this.fetchingMovieDetails();
+    this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
+      this.setMovies();
+    });
   }
 }
