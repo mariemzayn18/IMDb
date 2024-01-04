@@ -3,4 +3,6 @@ export const environment = {
   movieDBAPIKey: 'db552f09f7aa7f83033702a268815e8f',
   movieDBBaseUrl: 'https://api.themoviedb.org/3/',
   movieBaseImageUrl: 'https://image.tmdb.org/t/p/w500',
+  supportedLanguages: ['en', 'ar'],
+  defaultLanguage: 'en',
 };

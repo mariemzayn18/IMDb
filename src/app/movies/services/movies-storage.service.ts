@@ -18,7 +18,9 @@ export class MoviesStorageService {
     return this.http
       .get<Genre[]>(
         environment.movieDBBaseUrl +
-          'genre/movie/list?api_key=' +
+          'genre/movie/list?language=' +
+          environment.defaultLanguage +
+          '&api_key=' +
           environment.movieDBAPIKey
       )
       .pipe(
@@ -58,7 +60,9 @@ export class MoviesStorageService {
     return this.http
       .get<Movie[]>(
         environment.movieDBBaseUrl +
-          'movie/top_rated?api_key=' +
+          'movie/top_rated?language=' +
+          environment.defaultLanguage +
+          '&api_key=' +
           environment.movieDBAPIKey
       )
       .pipe(
@@ -90,7 +94,9 @@ export class MoviesStorageService {
         environment.movieDBBaseUrl +
           'movie/' +
           movieId +
-          '/credits?api_key=' +
+          '/credits?language=' +
+          environment.defaultLanguage +
+          '&api_key=' +
           environment.movieDBAPIKey
       )
       .pipe(
@@ -111,7 +117,7 @@ export class MoviesStorageService {
   }
 
   // Error handling
-  handleError(e: HttpErrorResponse) {
+  private handleError(e: HttpErrorResponse) {
     let errorMessage = 'An error occurred. Please try again.';
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));

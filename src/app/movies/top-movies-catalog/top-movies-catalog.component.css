@@ -1,5 +1,6 @@
 .card {
   transition: transform 0.5s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .card:hover {
@@ -31,10 +32,6 @@
 
 .card-title:hover {
   color: #08b6e5;
-}
-
-.card-animation {
-  animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {

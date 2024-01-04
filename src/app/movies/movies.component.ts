@@ -19,9 +19,5 @@ export class MoviesComponent implements OnInit {
         })
       )
       .subscribe();
-
-    // this.moviesStorageService.fetchMovieGenres().subscribe(() => {
-    //   this.moviesStorageService.fetchTopMovies().subscribe(() => {});
-    // });
   }
 }
