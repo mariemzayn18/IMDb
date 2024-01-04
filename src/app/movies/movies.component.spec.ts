@@ -11,7 +11,7 @@ import {
 } from '@angular/common/http/testing';
 import { MoviesComponent } from './movies.component';
 import { MoviesStorageService } from './services/movies-storage.service';
-import { of, tap } from 'rxjs';
+import { of, tap, throwError } from 'rxjs';
 import { MoviesService } from './services/movies.service';
 import { expectedGenres } from '../mock-data/genres';
 import { expectedMovies } from '../mock-data/movies';
@@ -75,5 +75,25 @@ describe('MoviesComponent', () => {
     // double check if the data is set correctly in the service
     expect(moviesService.movies.length).toBeGreaterThan(0);
     expect(moviesService.movies[0].title).toEqual('The Shawshank Redemption');
+  }));
+
+  it('should handle error when fetching movie genres on init', fakeAsync(() => {
+    // Arrange
+    const consoleErrorSpy = spyOn(console, 'error');
+
+    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
+      throwError(() => new Error('An error occured. Please try again.'))
+    );
+
+    // Act
+    component.ngOnInit();
+    tick();
+
+    // Assert
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'An error occured. Please try again.'
+    );
+
+    expect(moviesService.movies.length).toEqual(0); // Movies should be reset in case of an error
   }));
 });
