@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { map, tap } from 'rxjs';
+import { Observable, catchError, map, tap, of } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { Genre } from '../models/genre.model';
 import { MoviesService } from './movies.service';
@@ -32,7 +32,8 @@ export class MoviesStorageService {
         }),
         tap((genre) => {
           this.moviesService.setMovieGenres(genre);
-        })
+        }),
+        catchError(this.handleError('fetchMovieGenres', []))
       );
   }
 
@@ -67,7 +68,8 @@ export class MoviesStorageService {
         tap((movies: Movie[]) => {
           this.moviesService.setTopMovies(movies);
           this.moviesService.mapGenresIds();
-        })
+        }),
+        catchError(this.handleError('fetchTopMovies', []))
       );
   }
 
@@ -94,7 +96,23 @@ export class MoviesStorageService {
         }),
         tap((actor: any) => {
           this.moviesService.setMovieActors(actor);
-        })
+        }),
+        catchError(this.handleError('fetchMovieActors', []))
       );
+  }
+
+  // Error handling
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      operation = 'fetchTopMovies'
+        ? 'Fetching the top movies'
+        : 'fetchMovieGenres'
+        ? 'Fetching the movie genres'
+        : 'Fetching the movie actors';
+
+      console.error(`${operation} failed: ${error.message}`);
+
+      return of(result as T); // return an empty result.
+    };
   }
 }
