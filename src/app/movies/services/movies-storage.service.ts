@@ -111,7 +111,7 @@ export class MoviesStorageService {
   }
 
   // Error handling
-  private handleError(e: HttpErrorResponse) {
+  handleError(e: HttpErrorResponse) {
     let errorMessage = 'An error occurred. Please try again.';
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));

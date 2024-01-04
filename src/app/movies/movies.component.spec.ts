@@ -2,6 +2,7 @@ import {
   ComponentFixture,
   TestBed,
   fakeAsync,
+  flushMicrotasks,
   tick,
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -23,6 +24,7 @@ describe('MoviesComponent', () => {
   let httpTestingController: HttpTestingController;
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
+  let http: HttpClientTestingModule;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,7 +36,7 @@ describe('MoviesComponent', () => {
     fixture = TestBed.createComponent(MoviesComponent);
     component = fixture.componentInstance;
     httpTestingController = TestBed.inject(HttpTestingController);
-    moviesStorageService = TestBed.inject(MoviesStorageService);
+    http = moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);
 
     fixture.detectChanges();
@@ -84,6 +86,7 @@ describe('MoviesComponent', () => {
   }));
 
   it('should handle error when fetching movies on init', fakeAsync(() => {
+    // let handleErrorSpy = spyOn(moviesStorageService, 'handleError');
 
     spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
       of(expectedGenres).pipe(
@@ -93,14 +96,17 @@ describe('MoviesComponent', () => {
       )
     );
 
-    spyOn(moviesStorageService, 'fetchTopMovies').and.throwError(
-      'An error occurred. Please try again.'
+    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
+      throwError(() => new Error('An error occurred. Please try again.'))
     );
 
-    expect(function () {
+    expect(() => {
       component.ngOnInit();
       tick();
+      flushMicrotasks();
     }).toThrowError('An error occurred. Please try again.');
-    
+
+    // tick();
+    // expect(handleErrorSpy).toHaveBeenCalled();
   }));
 });
