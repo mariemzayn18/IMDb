@@ -17,6 +17,10 @@ export class MoviesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.fetchingMovieDetails();
+  }
+
+  fetchingMovieDetails() {
     this.isLoading = true;
     this.moviesStorageService
       .fetchMovieGenres()

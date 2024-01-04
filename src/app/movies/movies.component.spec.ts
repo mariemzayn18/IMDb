@@ -17,6 +17,8 @@ import { MoviesService } from './services/movies.service';
 import { expectedGenres } from '../mock-data/genres';
 import { expectedMovies } from '../mock-data/movies';
 import { environment } from '../../environments/environment';
+import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { Router } from '@angular/router';
 
 describe('MoviesComponent', () => {
   let component: MoviesComponent;
@@ -25,12 +27,23 @@ describe('MoviesComponent', () => {
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
   let http: HttpClientTestingModule;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [MoviesComponent],
-      providers: [MoviesStorageService],
+      declarations: [MoviesComponent, LoadingSpinnerComponent],
+      providers: [
+        MoviesStorageService, // Provide a mock router with a no-op navigate method
+        {
+          provide: Router,
+          useValue: {
+            navigate: jasmine
+              .createSpy('navigate')
+              .and.callFake(() => Promise.resolve(true)),
+          },
+        },
+      ],
     });
 
     fixture = TestBed.createComponent(MoviesComponent);
@@ -38,6 +51,7 @@ describe('MoviesComponent', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
     http = moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);
+    router = TestBed.inject(Router);
 
     fixture.detectChanges();
   });
@@ -81,13 +95,10 @@ describe('MoviesComponent', () => {
     expect(moviesService.movies.length).toEqual(expectedMovies.length);
 
     // double check if the data is set correctly in the service
-    expect(moviesService.movies.length).toBeGreaterThan(0);
     expect(moviesService.movies[0].title).toEqual('The Shawshank Redemption');
   }));
 
   it('should handle error when fetching movies on init', fakeAsync(() => {
-    // let handleErrorSpy = spyOn(moviesStorageService, 'handleError');
-
     spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
       of(expectedGenres).pipe(
         tap((data) => {
@@ -105,8 +116,5 @@ describe('MoviesComponent', () => {
       tick();
       flushMicrotasks();
     }).toThrowError('An error occurred. Please try again.');
-
-    // tick();
-    // expect(handleErrorSpy).toHaveBeenCalled();
   }));
 });
