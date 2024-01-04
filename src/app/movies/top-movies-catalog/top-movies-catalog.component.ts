@@ -21,7 +21,6 @@ export class TopMoviesCatalogComponent {
   }
 
   showDetails(movie: Movie) {
-    this.moviesService.setCurrentMovieId(movie.id); // for the resolver
     this.router.navigate(['/movies', movie.id, movie.title]);
   }
 }
