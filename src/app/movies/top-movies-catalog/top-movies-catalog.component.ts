@@ -16,10 +16,13 @@ export class TopMoviesCatalogComponent {
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit() {
+    this.setMovies();
+  }
+
+  setMovies() {
     this.moviesList = this.moviesService.movies;
     this.moviesList.pop();
   }
-
   showDetails(movie: Movie) {
     this.router.navigate(['/movies', movie.id, movie.title]);
   }

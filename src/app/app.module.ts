@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthComponent } from './auth/auth.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { DangerAlertComponent } from './shared/danger-alert/danger-alert.component';
