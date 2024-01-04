@@ -1,3 +1,6 @@
 <app-movie-details-card [movie]="movie" [movieYear]="movieYear">
 </app-movie-details-card>
+<div class="container">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
 <app-actors-cards [actors]="actors"></app-actors-cards>

@@ -16,6 +16,8 @@ export class MovieDetailsComponent {
 
   movieYear: number = 0;
 
+  isLoading = false;
+
   constructor(
     private moviesService: MoviesService,
     private moviesStorageService: MoviesStorageService,
@@ -28,9 +30,11 @@ export class MovieDetailsComponent {
     // get movie details
     this.movie = this.moviesService.getMovieDetails(movieId);
 
+    this.isLoading = true;
     // fetch actors
     this.moviesStorageService.fetchMovieActors(movieId).subscribe((actors) => {
       this.actors = actors.length > 6 ? actors.slice(0, 6) : actors;
+      this.isLoading = false;
     });
 
     // extract the release year
