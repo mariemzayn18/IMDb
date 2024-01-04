@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, map, of, tap, throwError } from 'rxjs';
-import { Movie } from '../models/movie.model';
-import { Genre } from '../models/genre.model';
+import { Movie } from '../movies/models/movie.model';
+import { Genre } from '../movies/models/genre.model';
 import { MoviesService } from './movies.service';
 
 @Injectable({

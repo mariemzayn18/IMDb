@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
-import { MoviesService } from '../services/movies.service';
-import { MoviesStorageService } from '../services/movies-storage.service';
-import { exhaustMap } from 'rxjs';
+import { MoviesService } from '../../services/movies.service';
+import { MoviesStorageService } from '../../services/movies-storage.service';
 
 @Component({
   selector: 'app-top-movies-catalog',

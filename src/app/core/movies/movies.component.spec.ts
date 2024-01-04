@@ -11,13 +11,13 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { MoviesComponent } from './movies.component';
-import { MoviesStorageService } from './services/movies-storage.service';
+import { MoviesStorageService } from '../services/movies-storage.service';
 import { of, tap, throwError } from 'rxjs';
-import { MoviesService } from './services/movies.service';
+import { MoviesService } from '../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
-import { environment } from '../../environments/environment';
-import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { environment } from '../../../environments/environment';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { Router } from '@angular/router';
 
 describe('MoviesComponent', () => {

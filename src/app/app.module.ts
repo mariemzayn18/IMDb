@@ -9,19 +9,19 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './core/header/header.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { DangerAlertComponent } from './shared/danger-alert/danger-alert.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movies-catalog.component';
-import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { HomePageComponent } from './core/home-page/home-page.component';
+import { MoviesComponent } from './core/movies/movies.component';
+import { TopMoviesCatalogComponent } from './core/movies/top-movies-catalog/top-movies-catalog.component';
+import { MovieDetailsComponent } from './core/movies/movie-details/movie-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ActorsCardsComponent } from './movies/movie-details/actors-cards/actors-cards.component';
-import { MovieDetailsCardComponent } from './movies/movie-details/movie-details-card/movie-details-card.component';
+import { ActorsCardsComponent } from './core/movies/movie-details/actors-cards/actors-cards.component';
+import { MovieDetailsCardComponent } from './core/movies/movie-details/movie-details-card/movie-details-card.component';
 @NgModule({
   declarations: [
     AppComponent,

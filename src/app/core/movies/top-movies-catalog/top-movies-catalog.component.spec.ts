@@ -11,11 +11,11 @@ import {
 } from '@angular/common/http/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
-import { MoviesService } from './../services/movies.service';
-import { MoviesStorageService } from '../services/movies-storage.service';
+import { MoviesService } from '../../services/movies.service';
+import { MoviesStorageService } from '../../services/movies-storage.service';
 import { expectedMovies } from '../mock-data/movies';
 import { of, tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { expectedGenres } from '../mock-data/genres';
 
 describe('TopMoviesCatalogComponent', () => {

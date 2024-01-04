@@ -1,8 +1,8 @@
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.development';
 
 export class Actor {
   constructor(
-    private id: number, //movie id 
+    private id: number, //movie id
     public character: string,
     public name: string,
     private profile_path: string

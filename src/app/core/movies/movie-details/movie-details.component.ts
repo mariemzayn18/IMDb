@@ -1,7 +1,7 @@
-import { MoviesStorageService } from '../services/movies-storage.service';
+import { MoviesStorageService } from '../../services/movies-storage.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from '../services/movies.service';
+import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../models/movie.model';
 import { Actor } from '../models/actor.model';
 

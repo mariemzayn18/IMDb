@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Movie } from '../models/movie.model';
-import { Genre } from '../models/genre.model';
+import { Movie } from '../movies/models/movie.model';
+import { Genre } from '../movies/models/genre.model';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
