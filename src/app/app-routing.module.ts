@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { MoviesResolver } from './movies/services/movies-resolver.service';
-import { ActorsResolver } from './movies/services/actors-resolver.service';
 import { AuthComponent } from './auth/auth.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
@@ -26,7 +25,7 @@ const routes: Routes = [
       {
         path: ':id/:name',
         component: MovieDetailsComponent,
-        resolve: [MoviesResolver, ActorsResolver],
+        resolve: [MoviesResolver],
       },
     ],
   },

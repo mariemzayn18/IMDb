@@ -5,7 +5,6 @@ import { catchError, map, of, tap, throwError } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { Genre } from '../models/genre.model';
 import { MoviesService } from './movies.service';
-import { Actor } from '../models/actor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -84,10 +83,6 @@ export class MoviesStorageService {
   }
 
   // Fetch movie details from the API
-  private mapToMovieActors(actor: any): Actor {
-    return new Actor(actor.id, actor.character, actor.name, actor.profile_path);
-  }
-
   fetchMovieActors(movieId: number) {
     return this.http
       .get(
@@ -100,15 +95,6 @@ export class MoviesStorageService {
           environment.movieDBAPIKey
       )
       .pipe(
-        map((res: any) => {
-          if (res.cast) {
-            return res.cast.map((actor: any) => this.mapToMovieActors(actor));
-          }
-          return res.cast;
-        }),
-        tap((actor: any) => {
-          this.moviesService.setMovieActors(actor);
-        }),
         catchError((error: any) => {
           this.handleError(error);
           return of([]);

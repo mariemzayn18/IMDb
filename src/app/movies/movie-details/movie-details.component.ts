@@ -11,6 +11,7 @@ import { Actor } from '../models/actor.model';
   styleUrl: './movie-details.component.css',
 })
 export class MovieDetailsComponent {
+  movieId: number = 0;
   movie: Movie = {} as Movie;
   actors: Actor[] = [];
 
@@ -25,23 +26,44 @@ export class MovieDetailsComponent {
   ) {}
 
   ngOnInit() {
-    const movieId = +this.router.snapshot.params['id'];
+    this.currentMovieId();
+    this.getMovieDetails();
+    this.fetchActors();
+    this.extractYear(this.movie.releaseDate);
+  }
 
-    // get movie details
-    this.movie = this.moviesService.getMovieDetails(movieId);
+  currentMovieId() {
+    this.movieId = +this.router.snapshot.params['id'];
+  }
 
+  getMovieDetails() {
+    this.movie = this.moviesService.getMovieDetails(this.movieId);
+  }
+
+  fetchActors() {
     this.isLoading = true;
-    // fetch actors
-    this.moviesStorageService.fetchMovieActors(movieId).subscribe((actors) => {
-      this.actors = actors.length > 6 ? actors.slice(0, 6) : actors;
-      this.isLoading = false;
-    });
+    this.moviesStorageService
+      .fetchMovieActors(this.movieId)
+      .subscribe((actors: any) => {
+        //use safe navigation operator to avoid errors
+        if (actors?.cast) {
+          actors.cast =
+            actors.cast.length > 6 ? actors.cast.slice(0, 6) : actors.cast;
 
-    // extract the release year
-    this.movieYear = this.extractYear(this.movie.releaseDate);
+          this.actors = actors.cast.map((actor: any) => {
+            return new Actor(
+              actor.id,
+              actor.character,
+              actor.name,
+              actor.profile_path
+            );
+          });
+        }
+        this.isLoading = false;
+      });
   }
 
   extractYear(date: Date) {
-    return new Date(date).getFullYear();
+    this.movieYear = new Date(date).getFullYear();
   }
 }
