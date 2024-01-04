@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../services/movies.service';
+import { MoviesStorageService } from '../services/movies-storage.service';
+import { exhaustMap } from 'rxjs';
 
 @Component({
   selector: 'app-top-movies-catalog',
@@ -13,7 +15,11 @@ export class TopMoviesCatalogComponent {
   moviesList: Movie[] = [];
   p = 1; // Current page
 
-  constructor(private moviesService: MoviesService, private router: Router) {}
+  constructor(
+    private moviesService: MoviesService,
+    private moviesStorageService: MoviesStorageService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.setMovies();
@@ -25,5 +31,18 @@ export class TopMoviesCatalogComponent {
   }
   showDetails(movie: Movie) {
     this.router.navigate(['/movies', movie.id, movie.title]);
+  }
+
+  fetchingMovieDetails() {
+    this.moviesStorageService.fetchMovieGenres().subscribe(() => {
+      this.moviesStorageService.fetchTopMovies(this.p).subscribe(() => {
+        this.setMovies();
+      });
+    });
+  }
+
+  pageChanged(page: number) {
+    this.p = page;
+    this.fetchingMovieDetails();
   }
 }

@@ -55,14 +55,16 @@ export class MoviesStorageService {
     );
   }
 
-  fetchTopMovies() {
+  fetchTopMovies(page: number = 1) {
     return this.http
       .get<Movie[]>(
         environment.movieDBBaseUrl +
           'movie/top_rated?language=' +
           environment.defaultLanguage +
           '&api_key=' +
-          environment.movieDBAPIKey
+          environment.movieDBAPIKey +
+          '&page=' +
+          page
       )
       .pipe(
         map((res: any) => {
