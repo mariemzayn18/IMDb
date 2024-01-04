@@ -22,7 +22,7 @@ export class TopMoviesCatalogComponent {
   ) {}
 
   ngOnInit() {
-    this.setMovies();
+    this.pageChanged(this.p);
   }
 
   setMovies() {
@@ -36,6 +36,11 @@ export class TopMoviesCatalogComponent {
 
   pageChanged(page: number) {
     this.p = page;
+
+    if (page === 1) {
+      this.setMovies();
+    } else {
+    }
     this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
       this.setMovies();
     });
