@@ -1,5 +1,5 @@
 import { exhaustMap } from 'rxjs';
-import { MoviesStorageService } from './../shared/movies-storage.service';
+import { MoviesStorageService } from './services/movies-storage.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

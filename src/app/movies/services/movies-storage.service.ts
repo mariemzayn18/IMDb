@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { map, tap } from 'rxjs';
-import { Movie } from '../movies/models/movie.model';
-import { Genre } from '../movies/models/genre.model';
-import { MoviesService } from '../movies/services/movies.service';
-import { Actor } from '../movies/models/actor.model';
+import { Movie } from '../models/movie.model';
+import { Genre } from '../models/genre.model';
+import { MoviesService } from './movies.service';
+import { Actor } from '../models/actor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,7 @@ import { Actor } from '../movies/models/actor.model';
 export class MoviesStorageService {
   constructor(private http: HttpClient, private moviesService: MoviesService) {}
 
+  // Fetch movies genres from the API
   fetchMovieGenres() {
     return this.http
       .get<Genre[]>(
@@ -35,6 +36,20 @@ export class MoviesStorageService {
       );
   }
 
+  // Fetch top movies from the API
+  private mapToMovie(movie: any): Movie {
+    return new Movie(
+      movie.poster_path,
+      movie.backdrop_path,
+      movie.id,
+      movie.title,
+      movie.vote_average,
+      new Date(movie.release_date),
+      movie.overview,
+      movie.genre_ids
+    );
+  }
+
   fetchTopMovies() {
     return this.http
       .get<Movie[]>(
@@ -45,19 +60,7 @@ export class MoviesStorageService {
       .pipe(
         map((res: any) => {
           if (res.results) {
-            return res.results.map(
-              (movie: any) =>
-                new Movie(
-                  movie.poster_path,
-                  movie.backdrop_path,
-                  movie.id,
-                  movie.title,
-                  movie.vote_average,
-                  new Date(movie.release_date),
-                  movie.overview,
-                  movie.genre_ids
-                )
-            );
+            return res.results.map((movie: any) => this.mapToMovie(movie));
           }
           return res.results;
         }),
@@ -66,6 +69,11 @@ export class MoviesStorageService {
           this.moviesService.mapGenresIds();
         })
       );
+  }
+
+  // Fetch movie details from the API
+  private mapToMovieActors(actor: any): Actor {
+    return new Actor(actor.id, actor.character, actor.name, actor.profile_path);
   }
 
   fetchMovieActors(movieId: number) {
@@ -80,15 +88,7 @@ export class MoviesStorageService {
       .pipe(
         map((res: any) => {
           if (res.cast) {
-            return res.cast.map(
-              (actor: any) =>
-                new Actor(
-                  actor.id,
-                  actor.character,
-                  actor.name,
-                  actor.profile_path
-                )
-            );
+            return res.cast.map((actor: any) => this.mapToMovieActors(actor));
           }
           return res.cast;
         }),

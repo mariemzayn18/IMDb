@@ -1,4 +1,4 @@
-import { MoviesStorageService } from './../../shared/movies-storage.service';
+import { MoviesStorageService } from '../services/movies-storage.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../services/movies.service';

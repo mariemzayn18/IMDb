@@ -10,7 +10,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { MoviesComponent } from './movies.component';
-import { MoviesStorageService } from '../shared/movies-storage.service';
+import { MoviesStorageService } from './services/movies-storage.service';
 import { of, tap } from 'rxjs';
 import { MoviesService } from './services/movies.service';
 import { expectedGenres } from '../mock-data/genres';
