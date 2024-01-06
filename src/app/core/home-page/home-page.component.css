@@ -1,5 +1,6 @@
 .row {
   min-height: 100vh;
+  min-width: 100vw;
   background-image: url("/assets/images/home.jpg");
   background-repeat: no-repeat;
   background-size: cover;

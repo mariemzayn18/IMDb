@@ -9,37 +9,21 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './core/header/header.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+import { HeaderComponent } from './header/header.component';
 
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { HomePageComponent } from './core/home-page/home-page.component';
-import { MoviesComponent } from './core/movies/movies.component';
-import { TopMoviesCatalogComponent } from './core/movies/top-movies-catalog/top-movies-catalog.component';
-import { MovieDetailsComponent } from './core/movies/movie-details/movie-details.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { ActorsCardsComponent } from './core/movies/movie-details/actors-cards/actors-cards.component';
-import { MovieDetailsCardComponent } from './core/movies/movie-details/movie-details-card/movie-details-card.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
-    HomePageComponent,
-    MoviesComponent,
-    TopMoviesCatalogComponent,
-    MovieDetailsComponent,
-    ActorsCardsComponent,
-    MovieDetailsCardComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, AuthComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
+    SharedModule,
+    CoreModule,
   ],
   providers: [
     provideClientHydration(),

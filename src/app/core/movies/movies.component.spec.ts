@@ -16,7 +16,6 @@ import { of, tap, throwError } from 'rxjs';
 import { MoviesService } from '../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
-import { environment } from '../../../environments/environment';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { Router } from '@angular/router';
 
