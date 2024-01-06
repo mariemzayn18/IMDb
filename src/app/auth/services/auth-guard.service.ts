@@ -1,17 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable, map, take } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { map, take } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -34,3 +30,8 @@ export class AuthGuard implements CanActivate {
     );
   }
 }
+
+export const authGuardFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => inject(AuthGuard).canActivate(route, state);
