@@ -1,4 +1,4 @@
-import { Genre } from '../models/genre.model';
+import { Genre } from '../../models/genre.model';
 
 export const expectedGenres: Genre[] = [
   new Genre('1', 'Action'),

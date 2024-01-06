@@ -1,4 +1,7 @@
-<div class="container-fluid">
+<div class="container">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+<div class="container-fluid" *ngIf="!isLoading">
   <div class="row">
     <h1 class="text-center my-4">Top-Rated Movies</h1>
   </div>

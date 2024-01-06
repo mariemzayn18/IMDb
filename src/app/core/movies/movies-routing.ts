@@ -7,19 +7,21 @@ import { TopMoviesCatalogComponent } from './top-movies-catalog/top-movies-catal
 
 const routes: Routes = [
   {
-    path: 'movies',
+    path: '',
+    canActivate: [AuthGuard],
+    resolve: [MoviesResolver],
     children: [
       {
         path: 'top-movies-catalog',
         component: TopMoviesCatalogComponent,
-        canActivate: [AuthGuard],
-        resolve: [MoviesResolver],
       },
       {
         path: ':id/:name',
         component: MovieDetailsComponent,
-        canActivate: [AuthGuard],
-        resolve: [MoviesResolver],
+      },
+      {
+        path: '**',
+        redirectTo: '/movies/top-movies-catalog',
       },
     ],
   },

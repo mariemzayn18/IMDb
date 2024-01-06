@@ -1,3 +1,4 @@
+import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
 import {
   ComponentFixture,
   TestBed,
@@ -10,18 +11,17 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { MoviesComponent } from './movies.component';
-import { MoviesStorageService } from '../services/movies-storage.service';
+import { MoviesStorageService } from '../../services/movies-storage.service';
 import { of, tap, throwError } from 'rxjs';
-import { MoviesService } from '../services/movies.service';
+import { MoviesService } from '../../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
-import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { Router } from '@angular/router';
+import { SharedModule } from '../../../shared/shared.module';
 
-describe('MoviesComponent', () => {
-  let component: MoviesComponent;
-  let fixture: ComponentFixture<MoviesComponent>;
+describe('TopMoviesCatalogComponent', () => {
+  let component: TopMoviesCatalogComponent;
+  let fixture: ComponentFixture<TopMoviesCatalogComponent>;
   let httpTestingController: HttpTestingController;
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
@@ -30,8 +30,8 @@ describe('MoviesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [MoviesComponent, LoadingSpinnerComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, SharedModule],
+      declarations: [TopMoviesCatalogComponent],
       providers: [
         MoviesStorageService, // Provide a mock router with a no-op navigate method
         {
@@ -45,7 +45,7 @@ describe('MoviesComponent', () => {
       ],
     });
 
-    fixture = TestBed.createComponent(MoviesComponent);
+    fixture = TestBed.createComponent(TopMoviesCatalogComponent);
     component = fixture.componentInstance;
     httpTestingController = TestBed.inject(HttpTestingController);
     http = moviesStorageService = TestBed.inject(MoviesStorageService);

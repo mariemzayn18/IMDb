@@ -1,4 +1,4 @@
-import { Movie } from '../models/movie.model';
+import { Movie } from '../../models/movie.model';
 
 export const expectedMovies: Movie[] = [
   new Movie(

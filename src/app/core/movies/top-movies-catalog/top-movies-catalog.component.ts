@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { MoviesStorageService } from '../../services/movies-storage.service';
+import { exhaustMap } from 'rxjs';
 
 @Component({
   selector: 'app-top-movies-catalog',
@@ -10,7 +11,7 @@ import { MoviesStorageService } from '../../services/movies-storage.service';
   styleUrl: './top-movies-catalog.component.css',
 })
 export class TopMoviesCatalogComponent {
-  title = 'Top-Rated Movies';
+  isLoading = false;
   moviesList: Movie[] = [];
   p = 1; // Current page
 
@@ -21,7 +22,23 @@ export class TopMoviesCatalogComponent {
   ) {}
 
   ngOnInit() {
+    this.fetchingMovieDetails();
+
     this.pageChanged(this.p);
+  }
+
+  fetchingMovieDetails() {
+    this.isLoading = true;
+    this.moviesStorageService
+      .fetchMovieGenres()
+      .pipe(
+        exhaustMap(() => {
+          return this.moviesStorageService.fetchTopMovies();
+        })
+      )
+      .subscribe(() => {
+        this.isLoading = false;
+      });
   }
 
   setMovies() {
@@ -38,9 +55,12 @@ export class TopMoviesCatalogComponent {
     if (page === 1) {
       this.setMovies();
     } else {
+      this.isLoading = true;
+
+      this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
+        this.setMovies();
+        this.isLoading = false;
+      });
     }
-    this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
-      this.setMovies();
-    });
   }
 }
