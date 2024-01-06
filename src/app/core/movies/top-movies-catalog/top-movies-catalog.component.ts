@@ -23,7 +23,6 @@ export class TopMoviesCatalogComponent {
 
   ngOnInit() {
     this.fetchingMovieDetails();
-
     this.pageChanged(this.p);
   }
 
@@ -54,9 +53,8 @@ export class TopMoviesCatalogComponent {
 
     if (page === 1) {
       this.setMovies();
-    } else {
+    } else if (!this.isLoading) {
       this.isLoading = true;
-
       this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
         this.setMovies();
         this.isLoading = false;
