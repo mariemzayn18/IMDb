@@ -21,25 +21,6 @@ export class AuthComponent {
 
   errorMessage: string = '';
 
-  formFields = [
-    {
-      label: 'Email',
-      name: 'email',
-      type: 'text',
-      valid: false,
-      touched: false,
-      errorMessage: 'Please enter a valid email!',
-    },
-    {
-      label: 'Password',
-      name: 'password',
-      type: 'password',
-      valid: false,
-      touched: false,
-      errorMessage: 'Password should be at least 6 characters!',
-    },
-  ];
-
   constructor(private authService: AuthService, private router: Router) {}
 
   resetForm(form: NgForm) {

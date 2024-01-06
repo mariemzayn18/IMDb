@@ -7,31 +7,56 @@
   <div class="row pb-3">
     <div class="col-12">
       <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <!-- Email input field -->
         <div
-          *ngFor="let field of formFields"
           class="row"
-          [ngClass]="{ 'pb-4': currentField.valid || !currentField.touched }"
+          [ngClass]="{ 'pb-4': emailField.valid || !emailField.touched }"
         >
           <div class="col-12 form-group">
-            <label for="{{ field.name }}" class="h6">{{ field.label }}</label>
+            <label for="email" class="h6">Email</label>
             <input
-              [type]="field.type"
-              [name]="field.name"
+              type="text"
+              name="email"
               ngModel
               class="form-control"
               required
-              #currentField="ngModel"
-              [email]="field.name === 'email'"
-              [minlength]="field.name === 'password' ? 6 : null"
+              #emailField="ngModel"
+              email
             />
-            <app-danger-alert
-              [content]="{
-                condition: !currentField.valid && currentField.touched,
-                message: field.errorMessage
-              }"
-            ></app-danger-alert>
+            <div
+              class="help-block alert alert-danger small mt-2 p-2"
+              *ngIf="!emailField.valid && emailField.touched"
+            >
+              Please enter a valid email!
+            </div>
           </div>
         </div>
+
+        <!-- Password input field -->
+        <div
+          class="row"
+          [ngClass]="{ 'pb-4': passwordField.valid || !passwordField.touched }"
+        >
+          <div class="col-12 form-group">
+            <label for="password" class="h6">Password</label>
+            <input
+              type="password"
+              name="password"
+              ngModel
+              class="form-control"
+              required
+              #passwordField="ngModel"
+              [minlength]="6"
+            />
+            <div
+              class="help-block alert alert-danger small mt-2 p-2"
+              *ngIf="!passwordField.valid && passwordField.touched"
+            >
+              Password should be at least 6 characters!
+            </div>
+          </div>
+        </div>
+
         <div class="row pb-4">
           <div class="d-grid">
             <button
@@ -44,12 +69,12 @@
           </div>
         </div>
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-        <app-danger-alert
-          [content]="{
-            condition: errorMessage.length != 0,
-            message: errorMessage
-          }"
-        ></app-danger-alert>
+        <div
+          class="help-block alert alert-danger small mt-2 p-2"
+          *ngIf="errorMessage.length != 0"
+        >
+          {{ errorMessage }}
+        </div>
 
         <hr />
 

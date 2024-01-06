@@ -14,7 +14,6 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { DangerAlertComponent } from './shared/danger-alert/danger-alert.component';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { MoviesComponent } from './core/movies/movies.component';
 import { TopMoviesCatalogComponent } from './core/movies/top-movies-catalog/top-movies-catalog.component';
@@ -28,7 +27,6 @@ import { MovieDetailsCardComponent } from './core/movies/movie-details/movie-det
     HeaderComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    DangerAlertComponent,
     HomePageComponent,
     MoviesComponent,
     TopMoviesCatalogComponent,

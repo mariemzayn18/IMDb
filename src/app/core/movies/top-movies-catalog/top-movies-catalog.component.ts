@@ -26,7 +26,6 @@ export class TopMoviesCatalogComponent {
 
   setMovies() {
     this.moviesList = this.moviesService.movies;
-    this.moviesList.pop();
   }
 
   showDetails(movie: Movie) {
