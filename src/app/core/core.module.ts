@@ -4,11 +4,10 @@ import { RouterModule } from '@angular/router';
 import { CoreRoutingModule } from './core-routing.module';
 
 import { HomePageComponent } from './home-page/home-page.component';
-import { MoviesModule } from './movies/movies.module';
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [CommonModule, RouterModule, CoreRoutingModule, MoviesModule],
+  imports: [CommonModule, RouterModule, CoreRoutingModule],
   exports: [HomePageComponent],
 })
 export class CoreModule {}

@@ -23,21 +23,16 @@ export class TopMoviesCatalogComponent {
 
   ngOnInit() {
     this.initMoviesFetching();
-    this.pageChanged(this.p);
   }
 
   initMoviesFetching() {
     this.isLoading = true;
-    this.moviesStorageService
-      .fetchMovieGenres()
-      .pipe(
-        exhaustMap(() => {
-          return this.moviesStorageService.fetchTopMovies();
-        })
-      )
-      .subscribe(() => {
+    this.moviesStorageService.fetchMovieGenres().subscribe(() => {
+      this.moviesStorageService.fetchTopMovies(1).subscribe(() => {
+        this.setMovies();
         this.isLoading = false;
       });
+    });
   }
 
   setMovies() {
@@ -51,14 +46,10 @@ export class TopMoviesCatalogComponent {
   pageChanged(page: number) {
     this.p = page;
 
-    if (page === 1) {
+    this.isLoading = true;
+    this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
       this.setMovies();
-    } else if (this.isLoading === false) {
-      this.isLoading = true;
-      this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
-        this.setMovies();
-        this.isLoading = false;
-      });
-    }
+      this.isLoading = false;
+    });
   }
 }

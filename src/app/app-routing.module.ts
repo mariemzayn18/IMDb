@@ -5,7 +5,8 @@ import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent, canActivate: [UnauthGuard] },
-];
+]
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),

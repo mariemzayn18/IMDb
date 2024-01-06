@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'movies',
     loadChildren: () =>
-      import('./movies/movies-routing').then((m) => m.MoviesRoutingModule),
+      import('./movies/movies.module').then((m) => m.MoviesModule),
   },
 ];
 
