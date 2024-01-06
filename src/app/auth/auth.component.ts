@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, exhaustMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthService } from './services/auth.service';
 import { AuthResponseData } from './services/auth.service';
