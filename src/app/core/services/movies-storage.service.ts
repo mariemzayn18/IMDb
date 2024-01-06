@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { catchError, map, of, tap, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Movie } from '../movies/models/movie.model';
 import { Genre } from '../movies/models/genre.model';
 import { MoviesService } from './movies.service';
@@ -16,11 +16,7 @@ export class MoviesStorageService {
   fetchMovieGenres() {
     return this.http
       .get<Genre[]>(
-        environment.movieDBBaseUrl +
-          'genre/movie/list?language=' +
-          environment.defaultLanguage +
-          '&api_key=' +
-          environment.movieDBAPIKey
+        environment.fetchingMovieGenresUrl + environment.movieDBAPIKey
       )
       .pipe(
         map((res: any) => {
@@ -58,10 +54,7 @@ export class MoviesStorageService {
   fetchTopMovies(page: number = 1) {
     return this.http
       .get<Movie[]>(
-        environment.movieDBBaseUrl +
-          'movie/top_rated?language=' +
-          environment.defaultLanguage +
-          '&api_key=' +
+        environment.fetchingTopMoviesUrl +
           environment.movieDBAPIKey +
           '&page=' +
           page
@@ -88,12 +81,9 @@ export class MoviesStorageService {
   fetchMovieActors(movieId: number) {
     return this.http
       .get(
-        environment.movieDBBaseUrl +
-          'movie/' +
+        environment.fetchingMovieActorsBaseUrl +
           movieId +
-          '/credits?language=' +
-          environment.defaultLanguage +
-          '&api_key=' +
+          '/credits?api_key=' +
           environment.movieDBAPIKey
       )
       .pipe(
