@@ -31,7 +31,12 @@ export class MoviesComponent implements OnInit {
       )
       .subscribe(() => {
         this.isLoading = false;
-        this.router.navigate(['/movies/top-movies-catalog']);
+        if (
+          this.router.url === '/movies' ||
+          this.router.url === '/movies/top-movies-catalog'
+        ) {
+          this.router.navigate(['/movies/top-movies-catalog']);
+        }
       });
   }
 }

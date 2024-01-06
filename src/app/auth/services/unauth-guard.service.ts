@@ -1,7 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable, map, take } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -22,7 +26,7 @@ export class UnauthGuard {
       map((user) => {
         const isAuthenticated = !!user;
         if (isAuthenticated) {
-          return this.router.createUrlTree(['/movies']);
+          return this.router.createUrlTree(['/movies/top-movies-catalog']);
         }
         return true;
       })

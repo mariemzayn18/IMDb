@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -14,9 +8,6 @@ import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
 import { MoviesService } from '../../services/movies.service';
 import { MoviesStorageService } from '../../services/movies-storage.service';
 import { expectedMovies } from '../mock-data/movies';
-import { of, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { expectedGenres } from '../mock-data/genres';
 
 describe('TopMoviesCatalogComponent', () => {
   let component: TopMoviesCatalogComponent;
@@ -53,9 +44,7 @@ describe('TopMoviesCatalogComponent', () => {
   it('should have movies list similar to that in the service', () => {
     moviesService.setTopMovies(expectedMovies);
     component.ngOnInit();
-    expect(component.moviesList.length).toEqual(
-      moviesService.movies.length - 1
-    );
+    expect(component.moviesList.length).toEqual(moviesService.movies.length);
   });
 
   it('should have movies cards rendered correctly', () => {
