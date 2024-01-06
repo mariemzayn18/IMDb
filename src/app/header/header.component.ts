@@ -14,6 +14,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(public authService: AuthService) {}
 
   ngOnInit() {
+    this.checkIfLoggedIn(); // to exchange the login/logout button
+  }
+
+  checkIfLoggedIn() {
     this.userSubscriber = this.authService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
     });

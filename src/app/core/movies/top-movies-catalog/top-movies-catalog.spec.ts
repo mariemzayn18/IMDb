@@ -16,7 +16,6 @@ import { of, tap, throwError } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
-import { Router } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 
 describe('TopMoviesCatalogComponent', () => {
@@ -26,7 +25,6 @@ describe('TopMoviesCatalogComponent', () => {
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
   let http: HttpClientTestingModule;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,14 +32,6 @@ describe('TopMoviesCatalogComponent', () => {
       declarations: [TopMoviesCatalogComponent],
       providers: [
         MoviesStorageService, // Provide a mock router with a no-op navigate method
-        {
-          provide: Router,
-          useValue: {
-            navigate: jasmine
-              .createSpy('navigate')
-              .and.callFake(() => Promise.resolve(true)),
-          },
-        },
       ],
     });
 
@@ -50,7 +40,6 @@ describe('TopMoviesCatalogComponent', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
     http = moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);
-    router = TestBed.inject(Router);
 
     fixture.detectChanges();
   });
