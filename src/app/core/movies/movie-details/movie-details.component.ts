@@ -33,7 +33,6 @@ export class MovieDetailsComponent {
   }
 
   currentMovieId() {
-    this.movieId = +this.router.snapshot.params['id'];
     this.router.params.subscribe((params) => {
       this.movieId = +params['id'];
     });
