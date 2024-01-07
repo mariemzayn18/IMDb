@@ -28,7 +28,7 @@ export class TopMoviesCatalogComponent {
   initMoviesFetching() {
     this.isLoading = true;
     this.moviesStorageService.fetchMovieGenres().subscribe(() => {
-      this.moviesStorageService.fetchTopMovies(1).subscribe(() => {
+      this.moviesStorageService.fetchTopMovies().subscribe(() => {
         this.setMovies();
         this.isLoading = false;
       });

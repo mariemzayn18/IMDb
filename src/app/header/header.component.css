@@ -1,13 +1,15 @@
+/* Set background color for the navigation bar*/
 nav {
   background: #121212;
-  min-width: 100vw;
 }
 
+/* Define dimensions for the logo */
 img {
   width: 80px;
   height: auto;
 }
 
+/* Set cursor style for links */
 a {
   cursor: pointer;
 }

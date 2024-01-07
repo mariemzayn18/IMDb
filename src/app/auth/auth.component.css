@@ -1,3 +1,4 @@
+/* The form container */
 .container {
   width: 30%;
 }
@@ -8,22 +9,27 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
   .container {
     width: 75%;
   }
 }
 
+/* For invalid and touched input fields */
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+
 input.ng-invalid.ng-touched:focus {
   box-shadow: none;
 }
+
+/* For autofilling of input fields */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
+/* Button Styles */
 .signInBtn {
   background-color: #ffd814;
   border: none;

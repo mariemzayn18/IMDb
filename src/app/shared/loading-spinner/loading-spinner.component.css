@@ -1,9 +1,12 @@
+/* The loader container */
 .lds-ring {
   display: inline-block;
   position: relative;
   width: 40px;
   height: 40px;
 }
+
+/*For each individual ring in the loader */
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -16,15 +19,21 @@
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #ffd814 transparent transparent transparent;
 }
+
+/* Set animation delay for each individual ring to create the spinning effect */
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
+/* The rotation animation */
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -32,8 +41,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.loadingSpinner {
-  text-align: center;
 }

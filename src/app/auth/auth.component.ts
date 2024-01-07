@@ -12,13 +12,14 @@ import { AuthResponseData } from './services/auth.service';
   styleUrl: './auth.component.css',
 })
 export class AuthComponent {
+  // For switching between sign in and sign up
   title = 'Sign in';
   newOrHavingAccount = 'New to IMDb?';
   switchButtonText = 'Create your IMDb account';
   submitButtonText = 'Sign in';
   isLoginMode = true;
-  isLoading = false;
 
+  isLoading = false;
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}

@@ -1,22 +1,18 @@
 import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  flushMicrotasks,
-  tick,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { MoviesStorageService } from '../../services/movies-storage.service';
+import { SharedModule } from '../../../shared/shared.module';
+
 import { of, tap, throwError } from 'rxjs';
+
+import { MoviesStorageService } from '../../services/movies-storage.service';
 import { MoviesService } from '../../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
-import { SharedModule } from '../../../shared/shared.module';
 
 describe('TopMoviesCatalogComponent', () => {
   let component: TopMoviesCatalogComponent;
@@ -24,21 +20,20 @@ describe('TopMoviesCatalogComponent', () => {
   let httpTestingController: HttpTestingController;
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
-  let http: HttpClientTestingModule;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule, SharedModule],
       declarations: [TopMoviesCatalogComponent],
       providers: [
-        MoviesStorageService, // Provide a mock router with a no-op navigate method
+        MoviesStorageService, 
       ],
     });
 
     fixture = TestBed.createComponent(TopMoviesCatalogComponent);
     component = fixture.componentInstance;
     httpTestingController = TestBed.inject(HttpTestingController);
-    http = moviesStorageService = TestBed.inject(MoviesStorageService);
+    moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);
 
     fixture.detectChanges();
@@ -102,7 +97,6 @@ describe('TopMoviesCatalogComponent', () => {
     expect(() => {
       component.ngOnInit();
       tick();
-      flushMicrotasks();
     }).toThrowError('An error occurred. Please try again.');
   }));
 });

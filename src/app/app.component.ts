@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  title = 'IMDb';
-
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    this.retrieveUserData();
+  }
+
+  retrieveUserData() {
     this.authService.retrieveUserData();
   }
 }
