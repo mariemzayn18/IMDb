@@ -38,7 +38,7 @@ export class MoviesStorageService {
   }
 
   // Fetch top movies from the API
-  private mapToMovie(movie: any): Movie {
+  public mapToMovie(movie: any, genres: any): Movie {
     return new Movie(
       movie.poster_path,
       movie.backdrop_path,
@@ -47,7 +47,8 @@ export class MoviesStorageService {
       movie.vote_average,
       new Date(movie.release_date),
       movie.overview,
-      movie.genre_ids
+      genres,
+      movie.page
     );
   }
 
@@ -62,7 +63,9 @@ export class MoviesStorageService {
       .pipe(
         map((res: any) => {
           if (res.results) {
-            return res.results.map((movie: any) => this.mapToMovie(movie));
+            return res.results.map((movie: any) =>
+              this.mapToMovie(movie, movie.genre_ids)
+            );
           }
           return res.results;
         }),
@@ -77,13 +80,29 @@ export class MoviesStorageService {
       );
   }
 
-  // Fetch movie details from the API
-  fetchMovieActors(movieId: number) {
+  // Fetch movie actors from the API
+  fetchMovieActorsById(movieId: number) {
     return this.http
       .get(
-        environment.fetchingMovieActorsBaseUrl +
+        environment.fetchingMovieByIdBaseUrl +
           movieId +
           '/credits?api_key=' +
+          environment.movieDBAPIKey
+      )
+      .pipe(
+        catchError((error: any) => {
+          this.handleError(error);
+          return of([]);
+        })
+      );
+  }
+
+  fetchMovieDetailsById(movieId: number) {
+    return this.http
+      .get(
+        environment.fetchingMovieByIdBaseUrl +
+          movieId +
+          '?api_key=' +
           environment.movieDBAPIKey
       )
       .pipe(

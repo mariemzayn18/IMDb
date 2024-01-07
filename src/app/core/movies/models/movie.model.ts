@@ -9,7 +9,8 @@ export class Movie {
     public rating: number,
     public releaseDate: Date,
     public overview: string,
-    public genre: string[]
+    public genre: string[],
+    public page?: number
   ) {}
 
   get moviePoster() {

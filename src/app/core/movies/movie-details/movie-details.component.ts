@@ -17,7 +17,8 @@ export class MovieDetailsComponent {
 
   movieYear: number = 0;
 
-  isLoading = false;
+  isLoadingMovieDetails = false;
+  isLoadingActors = false;
 
   constructor(
     private moviesService: MoviesService,
@@ -29,7 +30,6 @@ export class MovieDetailsComponent {
     this.currentMovieId();
     this.getMovieDetails();
     this.fetchActors();
-    this.extractYear(this.movie.releaseDate);
   }
 
   currentMovieId() {
@@ -40,13 +40,30 @@ export class MovieDetailsComponent {
   }
 
   getMovieDetails() {
-    this.movie = this.moviesService.getMovieDetails(this.movieId);
+    if (this.moviesService.movies.length === 0) {
+      this.isLoadingMovieDetails = true;
+      this.moviesStorageService
+        .fetchMovieDetailsById(this.movieId)
+        .subscribe((movie: any) => {
+          if (movie?.original_title) {
+            this.movie = this.moviesStorageService.mapToMovie(
+              movie,
+              movie.genres.map((genre: any) => genre.name)
+            );
+            this.extractYear(this.movie.releaseDate);
+            this.isLoadingMovieDetails = false;
+          }
+        });
+    } else {
+      this.movie = this.moviesService.getMovieDetails(this.movieId);
+      this.extractYear(this.movie.releaseDate);
+    }
   }
 
   fetchActors() {
-    this.isLoading = true;
+    this.isLoadingActors = true;
     this.moviesStorageService
-      .fetchMovieActors(this.movieId)
+      .fetchMovieActorsById(this.movieId)
       .subscribe((actors: any) => {
         //use safe navigation operator to avoid errors
         if (actors?.cast) {
@@ -62,7 +79,7 @@ export class MovieDetailsComponent {
             );
           });
         }
-        this.isLoading = false;
+        this.isLoadingActors = false;
       });
   }
 

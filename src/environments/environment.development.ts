@@ -10,5 +10,5 @@ export const environment = {
   fetchingTopMoviesUrl: 'https://api.themoviedb.org/3/movie/top_rated?api_key=',
   fetchingMovieGenresUrl:
     'https://api.themoviedb.org/3/genre/movie/list?api_key=',
-  fetchingMovieActorsBaseUrl: 'https://api.themoviedb.org/3/movie/',
+  fetchingMovieByIdBaseUrl: 'https://api.themoviedb.org/3/movie/',
 };
