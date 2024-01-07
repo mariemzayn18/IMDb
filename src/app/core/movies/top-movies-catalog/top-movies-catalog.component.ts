@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { MoviesStorageService } from '../../services/movies-storage.service';
-import { exhaustMap } from 'rxjs';
 
 @Component({
   selector: 'app-top-movies-catalog',
@@ -45,7 +44,6 @@ export class TopMoviesCatalogComponent {
 
   pageChanged(page: number) {
     this.p = page;
-
     this.isLoading = true;
     this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
       this.setMovies();
