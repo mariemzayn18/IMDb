@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./movies/movies.module').then((m) => m.MoviesModule),
   },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
