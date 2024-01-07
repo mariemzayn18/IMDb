@@ -77,7 +77,7 @@ export class AuthService {
   logout() {
     this.user.next(null);
 
-    this.router.navigate(['/auth']); //to be changed to the home page ..
+    this.router.navigate(['']);
     localStorage.removeItem('userData');
 
     // clear timer if any.
