@@ -7,7 +7,8 @@ export const environment = {
   movieDBAPIKey: 'db552f09f7aa7f83033702a268815e8f',
   movieBaseImageUrl: 'https://image.tmdb.org/t/p/w500',
 
-  fetchingTopMoviesUrl: 'https://api.themoviedb.org/3/movie/top_rated?api_key=',
+  fetchingTopMoviesUrl:
+    'https://api.themoviedb.org/3/discover/movie/?sort_by=popularity.desc&api_key=',
   fetchingMovieGenresUrl:
     'https://api.themoviedb.org/3/genre/movie/list?api_key=',
   fetchingMovieByIdBaseUrl: 'https://api.themoviedb.org/3/movie/',
