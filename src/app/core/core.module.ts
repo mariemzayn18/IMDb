@@ -9,7 +9,6 @@ import { MovieDetailsCardComponent } from './movies/movie-details/movie-details-
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { TopMoviesCatalogComponent } from './movies/top-movies-catalog/top-movies-catalog.component';
 
-
 @NgModule({
   declarations: [
     TopMoviesCatalogComponent,

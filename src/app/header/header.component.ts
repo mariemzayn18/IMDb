@@ -9,11 +9,13 @@ import { AuthService } from '../auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
+  lang = 'en';
   private userSubscriber: Subscription = new Subscription();
 
   constructor(public authService: AuthService) {}
 
   ngOnInit() {
+    this.getLang(); // to set the language
     this.checkIfLoggedIn(); // to exchange the login/logout button
   }
 
@@ -21,6 +23,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscriber = this.authService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
     });
+  }
+
+  getLang() {
+    this.lang = localStorage.getItem('lang') || 'en';
+  }
+
+  changeLang(event: any) {
+    let lang = event.target.value;
+    localStorage.setItem('lang', lang);
+    window.location.reload();
   }
 
   logout() {

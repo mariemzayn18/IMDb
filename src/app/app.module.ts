@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
 import { HomePageComponent } from './home-page/home-page.component';
+import { MoviesInterceptorService } from './core/services/movies-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,11 @@ import { HomePageComponent } from './home-page/home-page.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MoviesInterceptorService,
       multi: true,
     },
   ],
