@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent {
+  constructor(private translateService: TranslateService) {}
+
+  ngOnInit() {
+    this.translate();
+  }
+
+  translate() {
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 }

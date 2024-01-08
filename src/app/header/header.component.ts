@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   lang = 'en';
   private userSubscriber: Subscription = new Subscription();
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.getLang(); // to set the language
@@ -32,6 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   changeLang(event: any) {
     let lang = event.target.value;
     localStorage.setItem('lang', lang);
+    this.translateService.use(localStorage.getItem('lang') || 'en');
     window.location.reload();
   }
 

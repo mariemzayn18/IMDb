@@ -3,12 +3,14 @@
     class="row justify-content-center align-items-center min-vh-100 min-vw-100"
   >
     <div class="col-12 text-center">
-      <h1 class="text-light">Welcome to our Movie Collection!</h1>
+      <h1 class="text-light">
+        {{ "Welcome to our Movie Collection!" | translate }}
+      </h1>
       <a
         class="btn btn-lg rounded-0 bg-white border-0 fw-bold mt-4"
         routerLink="/movies/top-movies-catalog"
       >
-        START NOW!
+        {{ "START NOW!" | translate }}
       </a>
     </div>
   </div>

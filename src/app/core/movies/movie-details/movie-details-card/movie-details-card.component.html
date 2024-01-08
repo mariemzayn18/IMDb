@@ -2,7 +2,7 @@
   <div class="row mx-3 mx-sm-5 py-4 text-center text-md-start">
     <div class="col-12 col-md-6 px-0">
       <h1>{{ movie.title }}</h1>
-      <h6 class="movie-year">Movie - {{ movieYear }}</h6>
+      <h6 class="movie-year">{{ "Movie" | translate }} - {{ movieYear }}</h6>
     </div>
     <div
       class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center align-items-center h-100 mt-md-0 mt-2 px-0"
@@ -24,7 +24,7 @@
   </div>
   <div class="row mx-3 mx-sm-5 py-4">
     <div class="col-12 px-0">
-      <h2 class="text-center text-md-start">Overview</h2>
+      <h2 class="text-center text-md-start">{{ "Overview" | translate }}</h2>
       <p class="overview">{{ movie.overview }}</p>
     </div>
   </div>

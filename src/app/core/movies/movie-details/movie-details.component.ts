@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../models/movie.model';
 import { Actor } from '../models/actor.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie-details',
@@ -23,13 +24,19 @@ export class MovieDetailsComponent {
   constructor(
     private moviesService: MoviesService,
     private moviesStorageService: MoviesStorageService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
+    this.translate();
     this.currentMovieId();
     this.getMovieDetails();
     this.fetchActors();
+  }
+
+  translate() {
+    this.translateService.use(localStorage.getItem('lang') || 'en');
   }
 
   currentMovieId() {

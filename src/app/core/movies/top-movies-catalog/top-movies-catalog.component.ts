@@ -18,7 +18,7 @@ export class TopMoviesCatalogComponent {
   constructor(
     private moviesService: MoviesService,
     private moviesStorageService: MoviesStorageService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
