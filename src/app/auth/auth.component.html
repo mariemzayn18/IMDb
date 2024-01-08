@@ -1,7 +1,7 @@
 <div class="container border border-1 rounded mt-5 p-4">
   <div class="row pb-3">
     <div class="col-12">
-      <h1>{{ title }}</h1>
+      <h1>{{ title | translate }}</h1>
     </div>
   </div>
   <div class="row pb-3">
@@ -13,7 +13,7 @@
           [ngClass]="{ 'pb-4': emailField.valid || !emailField.touched }"
         >
           <div class="col-12 form-group">
-            <label for="email" class="h6">Email</label>
+            <label for="email" class="h6">{{ "Email" | translate }}</label>
             <input
               type="text"
               name="email"
@@ -27,7 +27,7 @@
               class="help-block alert alert-danger small mt-2 p-2"
               *ngIf="!emailField.valid && emailField.touched"
             >
-              Please enter a valid email!
+              {{ "Please enter a valid email!" | translate }}
             </div>
           </div>
         </div>
@@ -38,7 +38,9 @@
           [ngClass]="{ 'pb-4': passwordField.valid || !passwordField.touched }"
         >
           <div class="col-12 form-group">
-            <label for="password" class="h6">Password</label>
+            <label for="password" class="h6">{{
+              "Password" | translate
+            }}</label>
             <input
               type="password"
               name="password"
@@ -52,7 +54,7 @@
               class="help-block alert alert-danger small mt-2 p-2"
               *ngIf="!passwordField.valid && passwordField.touched"
             >
-              Password should be at least 6 characters!
+              {{ "Password should be at least 6 characters!" | translate }}
             </div>
           </div>
         </div>
@@ -65,7 +67,7 @@
               [disabled]="!form.valid"
               type="submit"
             >
-              {{ submitButtonText }}
+              {{ submitButtonText | translate }}
             </button>
           </div>
         </div>
@@ -74,7 +76,7 @@
           class="help-block alert alert-danger small mt-2 p-2"
           *ngIf="errorMessage.length != 0"
         >
-          {{ errorMessage }}
+          {{ errorMessage | translate }}
         </div>
 
         <hr />
@@ -82,13 +84,13 @@
         <!-- Switch button -->
         <div class="row text-center">
           <div class="col-12 form-group d-grid">
-            <p class="">{{ newOrHavingAccount }}</p>
+            <p class="">{{ newOrHavingAccount | translate }}</p>
             <button
               type="button"
               class="btn btn-outline-secondary"
               (click)="switchButtons(form)"
             >
-              {{ switchButtonText }}
+              {{ switchButtonText | translate }}
             </button>
           </div>
         </div>

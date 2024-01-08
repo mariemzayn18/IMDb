@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { MoviesStorageService } from '../../services/movies-storage.service';
 import { concatMap, take } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-movies-catalog',
   templateUrl: './top-movies-catalog.component.html',
   styleUrl: './top-movies-catalog.component.css',
 })
-export class TopMoviesCatalogComponent {
+export class TopMoviesCatalogComponent implements OnInit {
   isLoading = false;
   moviesList: Movie[] = [];
   p = 1; // Current page
@@ -19,12 +20,17 @@ export class TopMoviesCatalogComponent {
     private moviesService: MoviesService,
     private moviesStorageService: MoviesStorageService,
     private router: Router,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
+    this.translate();
     this.initMoviesFetching();
   }
 
+  translate() {
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
   initMoviesFetching() {
     this.isLoading = true;
     this.moviesStorageService

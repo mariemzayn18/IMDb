@@ -1,5 +1,10 @@
 import { TopMoviesCatalogComponent } from './top-movies-catalog.component';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   HttpClientTestingModule,
@@ -13,6 +18,7 @@ import { MoviesStorageService } from '../../services/movies-storage.service';
 import { MoviesService } from '../../services/movies.service';
 import { expectedGenres } from './mock-data/genres';
 import { expectedMovies } from './mock-data/movies';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 describe('TopMoviesCatalogComponent', () => {
   let component: TopMoviesCatalogComponent;
@@ -20,16 +26,23 @@ describe('TopMoviesCatalogComponent', () => {
   let httpTestingController: HttpTestingController;
   let moviesStorageService: MoviesStorageService;
   let moviesService: MoviesService;
-
+  let translateService: TranslateService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule, SharedModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        SharedModule,
+        TranslateModule.forRoot(),
+      ],
       declarations: [TopMoviesCatalogComponent],
+      providers: [TranslateService],
     });
 
     fixture = TestBed.createComponent(TopMoviesCatalogComponent);
     component = fixture.componentInstance;
-    
+
+    translateService = TestBed.inject(TranslateService);
     httpTestingController = TestBed.inject(HttpTestingController);
     moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);

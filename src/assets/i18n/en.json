@@ -15,5 +15,11 @@
   "Password": "Password",
   "New to IMDb?": "New to IMDb?",
   "Create your IMDb account": "Create your IMDb account",
-  "Already have an account?": "Already have an account?"
+  "Already have an account?": "Already have an account?",
+  "Password should be at least 6 characters!": "Password should be at least 6 characters!",
+  "Please enter a valid email!": "Please enter a valid email!",
+  "This email already exists.": "This email already exists.",
+  "Incorrect email or password. Please try again.": "Incorrect email or password. Please try again.",
+  "Too many attempts. Please try again later.": "Too many attempts. Please try again later.",
+  "An error occured. Please try again.": "An error occured. Please try again."
 }

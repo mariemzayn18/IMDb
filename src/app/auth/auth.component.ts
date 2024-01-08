@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ import { AuthResponseData } from './services/auth.service';
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   // For switching between sign in and sign up
   title = 'Sign in';
   newOrHavingAccount = 'New to IMDb?';
@@ -22,7 +23,19 @@ export class AuthComponent {
   isLoading = false;
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private translateService: TranslateService
+  ) {}
+
+  ngOnInit() {
+    this.translate();
+  }
+
+  translate() {
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 
   resetForm(form: NgForm) {
     form.reset();

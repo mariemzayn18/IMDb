@@ -1,5 +1,5 @@
 import { MoviesStorageService } from '../../services/movies-storage.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../models/movie.model';
@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css',
 })
-export class MovieDetailsComponent {
+export class MovieDetailsComponent implements OnInit{
   movieId: number = 0;
   movie: Movie = {} as Movie;
   actors: Actor[] = [];
