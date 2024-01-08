@@ -9,5 +9,4 @@ import { Movie } from '../../models/movie.model';
 export class MovieDetailsCardComponent {
   @Input() movie: Movie = {} as Movie;
   @Input() movieYear: number = 0;
-  @Input() lang: string = 'en';
 }

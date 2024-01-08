@@ -2,7 +2,6 @@
 <app-movie-details-card
   [movie]="movie"
   [movieYear]="movieYear"
-  [lang]="lang"
   *ngIf="!isLoadingMovieDetails"
 >
 </app-movie-details-card>
@@ -12,6 +11,5 @@
 ></app-loading-spinner>
 <app-actors-cards
   [actors]="actors"
-  [lang]="lang"
   *ngIf="!isLoadingActors"
 ></app-actors-cards>
