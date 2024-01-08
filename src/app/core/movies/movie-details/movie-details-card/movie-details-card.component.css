@@ -18,6 +18,20 @@ h2 {
   text-shadow: 2px 2px 2px black;
 }
 
+h1,
+h2,
+h6 {
+  text-align: start;
+}
+
+@media screen and (max-width: 600px) {
+  h1,
+  h2,
+  h6 {
+    text-align: center;
+  }
+}
+
 .badge {
   font-weight: 800;
 }
