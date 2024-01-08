@@ -8,4 +8,5 @@ import { Actor } from '../../models/actor.model';
 })
 export class ActorsCardsComponent {
   @Input() actors: Actor[] = [];
+  @Input() lang: string = 'en';
 }

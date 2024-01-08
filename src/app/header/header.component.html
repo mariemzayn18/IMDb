@@ -15,7 +15,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse mt-2 mt-sm-0" id="navbarNav">
-      <ul class="navbar-nav ms-md-auto">
+      <ul
+        [ngClass]="{
+          'navbar-nav': true,
+          'ms-md-auto': lang === 'en',
+          'me-md-auto': lang === 'ar'
+        }"
+      >
         <li class="nav-item">
           <select class="form-select" (change)="changeLang($event)">
             <option value="en" [selected]="lang == 'en'">English</option>

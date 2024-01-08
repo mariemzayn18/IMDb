@@ -14,6 +14,8 @@ export class HomePageComponent implements OnInit {
   }
 
   translate() {
-    this.translateService.use(localStorage.getItem('lang') || 'en');
+    let lang = localStorage.getItem('lang') || 'en';
+    this.translateService.use(lang);
+    document.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
 }

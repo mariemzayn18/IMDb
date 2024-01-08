@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     let lang = event.target.value;
     localStorage.setItem('lang', lang);
     this.translateService.use(localStorage.getItem('lang') || 'en');
+    document.dir = lang === 'ar' ? 'rtl' : 'ltr';
     window.location.reload();
   }
 

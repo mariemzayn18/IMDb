@@ -11,11 +11,11 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css',
 })
-export class MovieDetailsComponent implements OnInit{
+export class MovieDetailsComponent implements OnInit {
   movieId: number = 0;
   movie: Movie = {} as Movie;
   actors: Actor[] = [];
-
+  lang = 'en';
   movieYear: number = 0;
 
   isLoadingMovieDetails = false;
@@ -36,7 +36,9 @@ export class MovieDetailsComponent implements OnInit{
   }
 
   translate() {
-    this.translateService.use(localStorage.getItem('lang') || 'en');
+    this.lang = localStorage.getItem('lang') || 'en';
+    this.translateService.use(this.lang);
+    document.dir = this.lang === 'ar' ? 'rtl' : 'ltr';
   }
 
   currentMovieId() {
