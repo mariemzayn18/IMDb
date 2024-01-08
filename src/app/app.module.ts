@@ -15,9 +15,15 @@ import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, AuthComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    AuthComponent,
+    HomePageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
