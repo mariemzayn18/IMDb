@@ -11,7 +11,6 @@ const routes: Routes = [
     component: HomePageComponent,
   },
   { path: 'auth', component: AuthComponent, canActivate: [UnauthGuard] },
-
   {
     path: 'movies',
     loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),

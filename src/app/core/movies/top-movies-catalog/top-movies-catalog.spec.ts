@@ -25,13 +25,11 @@ describe('TopMoviesCatalogComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule, SharedModule],
       declarations: [TopMoviesCatalogComponent],
-      providers: [
-        MoviesStorageService, 
-      ],
     });
 
     fixture = TestBed.createComponent(TopMoviesCatalogComponent);
     component = fixture.componentInstance;
+    
     httpTestingController = TestBed.inject(HttpTestingController);
     moviesStorageService = TestBed.inject(MoviesStorageService);
     moviesService = TestBed.inject(MoviesService);
