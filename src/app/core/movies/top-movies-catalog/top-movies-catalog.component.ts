@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { MoviesStorageService } from '../../services/movies-storage.service';
+import { concatMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-top-movies-catalog',
@@ -26,12 +27,16 @@ export class TopMoviesCatalogComponent {
 
   initMoviesFetching() {
     this.isLoading = true;
-    this.moviesStorageService.fetchMovieGenres().subscribe(() => {
-      this.moviesStorageService.fetchTopMovies().subscribe(() => {
+    this.moviesStorageService
+      .fetchMovieGenres()
+      .pipe(
+        take(1),
+        concatMap(() => this.moviesStorageService.fetchTopMovies())
+      )
+      .subscribe(() => {
         this.setMovies();
         this.isLoading = false;
       });
-    });
   }
 
   setMovies() {
