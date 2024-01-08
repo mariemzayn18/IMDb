@@ -30,11 +30,11 @@ input:-webkit-autofill {
 }
 
 /* Button Styles */
-.signInBtn {
+.sign-in-btn {
   background-color: #ffd814;
   border: none;
 }
 
-.signInBtn:hover {
+.sign-in-btn:hover {
   background-color: #f7ca00;
 }
