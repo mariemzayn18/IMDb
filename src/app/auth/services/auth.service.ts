@@ -7,13 +7,8 @@ import { environment } from '../../../environments/environment';
 import { User } from './user.model';
 
 export interface AuthResponseData {
-  kind: string;
-  idToken: string;
-  email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
+  token: string;
+  expiresIn: number;
 }
 
 @Injectable({
@@ -28,23 +23,14 @@ export class AuthService {
   //------------ Sending signin request.
   signIn(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        environment.signInUrl + environment.firebaseAPIKey,
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
+      .post<AuthResponseData>(environment.signInUrl, {
+        email: email,
+        password: password,
+      })
       .pipe(
         catchError(this.handleError),
         tap((res) => {
-          this.handleAuthentication(
-            res.email,
-            res.localId,
-            res.idToken,
-            +res.expiresIn
-          );
+          this.handleAuthentication(res.token, res.expiresIn);
         })
       );
   }
@@ -52,23 +38,14 @@ export class AuthService {
   //------------ Sending signup request.
   signUp(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        environment.signUpUrl + environment.firebaseAPIKey,
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
+      .post<AuthResponseData>(environment.signUpUrl, {
+        email: email,
+        password: password,
+      })
       .pipe(
         catchError(this.handleError),
         tap((res) => {
-          this.handleAuthentication(
-            res.email,
-            res.localId,
-            res.idToken,
-            +res.expiresIn
-          );
+          this.handleAuthentication(res.token, res.expiresIn);
         })
       );
   }
@@ -91,13 +68,27 @@ export class AuthService {
     }, expirationDate);
   }
 
+  //------------ Authenticate user and save his data.
+
+  private handleAuthentication(token: string, expiresIn: number) {
+
+    const expirationDate = new Date(new Date().getTime()+ expiresIn * 1000);
+    const currentlyLoggedInUser = new User(token, expirationDate);
+
+    // publish the currently logged in user
+    this.user.next(currentlyLoggedInUser);
+
+    // call autoLogout method to logout the user when his token expires.
+    this.autoLogout(expiresIn * 1000);
+
+    // Save the currently logged in user data, in order not to losing them when reloading.
+    localStorage.setItem('userData', JSON.stringify(currentlyLoggedInUser));
+  }
+
   //------------ Retrieve user's data from local storage if he was authenticated
   retrieveUserData() {
     const userDataString = localStorage.getItem('userData');
-
     const userData: {
-      email: string;
-      id: string;
       _token: string;
       _tokenExpirationDate: string;
     } = userDataString ? JSON.parse(userDataString) : null;
@@ -105,8 +96,6 @@ export class AuthService {
     if (!userData) return;
 
     const loadedUser = new User(
-      userData.email,
-      userData.id,
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
@@ -120,49 +109,22 @@ export class AuthService {
       );
     }
   }
-  //------------ Authenticate user and save his data.
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token: string,
-    expiresIn: number
-  ) {
-    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
-    const currentlyLoggedInUser = new User(
-      email,
-      userId,
-      token,
-      expirationDate
-    );
-
-    // publish the currently logged in user
-    this.user.next(currentlyLoggedInUser);
-
-    // call autoLogout method to logout the user when his token expires.
-    this.autoLogout(expiresIn * 1000);
-
-    // Save the currently logged in user data, in order not to losing them when reloading.
-    localStorage.setItem('userData', JSON.stringify(currentlyLoggedInUser));
-  }
 
   //------------ Display a meaningful error messages for the user when signup/login.
-  private handleError(e: HttpErrorResponse) {
-    let errorMessage = 'An error occured. Please try again.';
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Something went wrong; please try again later.';
 
     // when network is lost..
-    if (!e.error || !e.error.error) {
+    if (!error.error) {
       return throwError(() => new Error(errorMessage));
     }
 
-    switch (e.error.error.message) {
+    switch (error.error.errorCode) {
       case 'EMAIL_EXISTS':
         errorMessage = 'This email already exists.';
         break;
-      case 'INVALID_LOGIN_CREDENTIALS':
+      case 'BAD_CREDENTIALS':
         errorMessage = 'Incorrect email or password. Please try again.';
-        break;
-      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-        errorMessage = 'Too many attempts. Please try again later.';
         break;
     }
 
