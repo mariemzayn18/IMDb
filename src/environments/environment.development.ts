@@ -1,14 +1,12 @@
 export const environment = {
-  signInUrl: 'http://localhost:8080/api/auth/authenticate',
-  signUpUrl: 'http://localhost:8080/api/auth/register',
+  signInAPI: 'http://localhost:8080/api/auth/authenticate',
+  signUpAPI: 'http://localhost:8080/api/auth/register',
 
-  firebaseAPIKey: 'AIzaSyCHqv-zrAg1SRfXBTTbRlVZCF2SD_LY348',
   movieDBAPIKey: 'db552f09f7aa7f83033702a268815e8f',
   movieBaseImageUrl: 'https://image.tmdb.org/t/p/w500',
 
-  fetchingTopMoviesUrl:
+  moviesAPI:
     'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=',
-  fetchingMovieGenresUrl:
-    'https://api.themoviedb.org/3/genre/movie/list?api_key=',
-  fetchingMovieByIdBaseUrl: 'https://api.themoviedb.org/3/movie/',
+  moviesGenresAPI: 'https://api.themoviedb.org/3/genre/movie/list?api_key=',
+  movieDetailsBaseAPI: 'https://api.themoviedb.org/3/movie/',
 };

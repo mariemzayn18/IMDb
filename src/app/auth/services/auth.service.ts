@@ -23,7 +23,7 @@ export class AuthService {
   //------------ Sending signin request.
   signIn(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(environment.signInUrl, {
+      .post<AuthResponseData>(environment.signInAPI, {
         email: email,
         password: password,
       })
@@ -38,7 +38,7 @@ export class AuthService {
   //------------ Sending signup request.
   signUp(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(environment.signUpUrl, {
+      .post<AuthResponseData>(environment.signUpAPI, {
         email: email,
         password: password,
       })
@@ -71,8 +71,7 @@ export class AuthService {
   //------------ Authenticate user and save his data.
 
   private handleAuthentication(token: string, expiresIn: number) {
-
-    const expirationDate = new Date(new Date().getTime()+ expiresIn * 1000);
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const currentlyLoggedInUser = new User(token, expirationDate);
 
     // publish the currently logged in user

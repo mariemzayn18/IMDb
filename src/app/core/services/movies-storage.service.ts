@@ -15,9 +15,7 @@ export class MoviesStorageService {
   // Fetch movies genres from the API
   fetchMovieGenres() {
     return this.http
-      .get<Genre[]>(
-        environment.fetchingMovieGenresUrl + environment.movieDBAPIKey
-      )
+      .get<Genre[]>(environment.moviesGenresAPI + environment.movieDBAPIKey)
       .pipe(
         map((res: any) => {
           if (res.genres) {
@@ -55,10 +53,7 @@ export class MoviesStorageService {
   fetchTopMovies(page: number = 1) {
     return this.http
       .get<Movie[]>(
-        environment.fetchingTopMoviesUrl +
-          environment.movieDBAPIKey +
-          '&page=' +
-          page
+        environment.moviesAPI + environment.movieDBAPIKey + '&page=' + page
       )
       .pipe(
         map((res: any) => {
@@ -84,7 +79,7 @@ export class MoviesStorageService {
   fetchMovieActorsById(movieId: number) {
     return this.http
       .get(
-        environment.fetchingMovieByIdBaseUrl +
+        environment.movieDetailsBaseAPI +
           movieId +
           '/credits?api_key=' +
           environment.movieDBAPIKey
@@ -100,7 +95,7 @@ export class MoviesStorageService {
   fetchMovieDetailsById(movieId: number) {
     return this.http
       .get(
-        environment.fetchingMovieByIdBaseUrl +
+        environment.movieDetailsBaseAPI +
           movieId +
           '?api_key=' +
           environment.movieDBAPIKey
