@@ -30,7 +30,6 @@ export class MoviesStorageService {
       .pipe(
         map((res: any) => {
           if (res) {
-            console.log(res);
             return res.map(
               (movie: any) => this.mapToMovie(movie)
             );

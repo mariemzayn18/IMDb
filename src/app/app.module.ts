@@ -52,11 +52,11 @@ export function httpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     provideClientHydration(),
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: MoviesInterceptorService,
