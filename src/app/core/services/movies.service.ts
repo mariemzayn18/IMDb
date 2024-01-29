@@ -9,7 +9,6 @@ export class MoviesService {
 
   constructor() {}
 
-  //------------ Movies
   setTopMovies(movies: Movie[]) {
     this.topMovies = movies;
   }
@@ -26,21 +25,5 @@ export class MoviesService {
     return {} as Movie;
   }
 
-  //------------ Genres
-  setMovieGenres(genre: Genre[]) {
-    this.movieGenres = genre;
-  }
-
-  get genres() {
-    return this.movieGenres.slice();
-  }
-
-  mapGenresIds() {
-    this.topMovies.map((movie) => {
-      movie.genre = movie.genre.map((genreId) => {
-        const foundGenre = this.genres.find((genre) => genre.id === genreId);
-        return foundGenre ? foundGenre.name : '';
-      });
-    });
-  }
+  
 }

@@ -5,11 +5,3 @@
   *ngIf="!isLoadingMovieDetails"
 >
 </app-movie-details-card>
-
-<app-loading-spinner
-  *ngIf="isLoadingActors && !isLoadingMovieDetails"
-></app-loading-spinner>
-<app-actors-cards
-  [actors]="actors"
-  *ngIf="!isLoadingActors"
-></app-actors-cards>

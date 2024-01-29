@@ -12,61 +12,34 @@ import { MoviesService } from './movies.service';
 export class MoviesStorageService {
   constructor(private http: HttpClient, private moviesService: MoviesService) {}
 
-  // Fetch movies genres from the API
-  fetchMovieGenres() {
-    return this.http
-      .get<Genre[]>(environment.moviesGenresAPI + environment.movieDBAPIKey)
-      .pipe(
-        map((res: any) => {
-          if (res.genres) {
-            return res.genres.map(
-              (genre: any) => new Genre(genre.id, genre.name)
-            );
-          }
-          return res.genre;
-        }),
-        tap((genre) => {
-          this.moviesService.setMovieGenres(genre);
-        }),
-        catchError((error: any) => {
-          this.handleError(error);
-          return of([]);
-        })
-      );
-  }
-
-  // Fetch top movies from the API
-  public mapToMovie(movie: any, genres: any): Movie {
+  mapToMovie(movie: any) {
     return new Movie(
-      movie.poster_path,
-      movie.backdrop_path,
       movie.id,
+      movie.posterPath,
+      movie.backdropPath,
       movie.title,
-      movie.vote_average,
-      new Date(movie.release_date),
+      new Date(movie.releaseDate.split('T')[0]),
       movie.overview,
-      genres,
-      movie.page
     );
   }
-
-  fetchTopMovies(page: number = 1) {
+  fetchMovies(page: number = 1) {
     return this.http
       .get<Movie[]>(
-        environment.moviesAPI + environment.movieDBAPIKey + '&page=' + page
+        environment.moviesAPI +'?page=' + page
       )
       .pipe(
         map((res: any) => {
-          if (res.results) {
-            return res.results.map((movie: any) =>
-              this.mapToMovie(movie, movie.genre_ids)
+          if (res) {
+            console.log(res);
+            return res.map(
+              (movie: any) => this.mapToMovie(movie)
             );
           }
-          return res.results;
+
+          return res;
         }),
         tap((movies: Movie[]) => {
           this.moviesService.setTopMovies(movies);
-          this.moviesService.mapGenresIds();
         }),
         catchError((error: any) => {
           this.handleError(error);
@@ -75,37 +48,13 @@ export class MoviesStorageService {
       );
   }
 
-  // Fetch movie actors from the API
-  fetchMovieActorsById(movieId: number) {
-    return this.http
-      .get(
-        environment.movieDetailsBaseAPI +
-          movieId +
-          '/credits?api_key=' +
-          environment.movieDBAPIKey
-      )
-      .pipe(
-        catchError((error: any) => {
-          this.handleError(error);
-          return of([]);
-        })
-      );
-  }
-
-  fetchMovieDetailsById(movieId: number) {
-    return this.http
-      .get(
-        environment.movieDetailsBaseAPI +
-          movieId +
-          '?api_key=' +
-          environment.movieDBAPIKey
-      )
-      .pipe(
-        catchError((error: any) => {
-          this.handleError(error);
-          return of([]);
-        })
-      );
+  fetchMovieById(movieId: number) {
+    return this.http.get(environment.movieDetailsAPI + movieId).pipe(
+      catchError((error: any) => {
+        this.handleError(error);
+        return of([]);
+      })
+    );
   }
 
   // Error handling

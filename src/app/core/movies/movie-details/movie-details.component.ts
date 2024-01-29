@@ -32,7 +32,6 @@ export class MovieDetailsComponent implements OnInit {
     this.translate();
     this.currentMovieId();
     this.getMovieDetails();
-    this.fetchActors();
   }
 
   translate() {
@@ -51,13 +50,10 @@ export class MovieDetailsComponent implements OnInit {
     if (this.moviesService.movies.length === 0) {
       this.isLoadingMovieDetails = true;
       this.moviesStorageService
-        .fetchMovieDetailsById(this.movieId)
+        .fetchMovieById(this.movieId)
         .subscribe((movie: any) => {
           if (movie?.original_title) {
-            this.movie = this.moviesStorageService.mapToMovie(
-              movie,
-              movie.genres.map((genre: any) => genre.name)
-            );
+            this.movie = this.moviesStorageService.mapToMovie(movie);
             this.extractYear(this.movie.releaseDate);
             this.isLoadingMovieDetails = false;
           }
@@ -68,28 +64,6 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
-  fetchActors() {
-    this.isLoadingActors = true;
-    this.moviesStorageService
-      .fetchMovieActorsById(this.movieId)
-      .subscribe((actors: any) => {
-        //use safe navigation operator to avoid errors
-        if (actors?.cast) {
-          actors.cast =
-            actors.cast.length > 6 ? actors.cast.slice(0, 6) : actors.cast;
-
-          this.actors = actors.cast.map((actor: any) => {
-            return new Actor(
-              actor.id,
-              actor.character,
-              actor.name,
-              actor.profile_path
-            );
-          });
-        }
-        this.isLoadingActors = false;
-      });
-  }
 
   extractYear(date: Date) {
     this.movieYear = new Date(date).getFullYear();

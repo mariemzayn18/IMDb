@@ -5,12 +5,8 @@ export class Actor {
     private id: number, //movie id
     public character: string,
     public name: string,
-    private profile_path: string
+    public profile_path: string
   ) {}
-
-  get actorImage() {
-    return environment.movieBaseImageUrl + this.profile_path;
-  }
 
   get movieId() {
     return this.id;

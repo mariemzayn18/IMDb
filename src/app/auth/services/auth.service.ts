@@ -51,6 +51,7 @@ export class AuthService {
   }
 
   //----------- Logging out, either manually or due to token's expired.
+  
   logout() {
     this.user.next(null);
 

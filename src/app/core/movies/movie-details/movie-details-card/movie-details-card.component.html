@@ -4,21 +4,14 @@
       <h1>{{ movie.title }}</h1>
       <h6 class="movie-year">{{ "Movie" | translate }} - {{ movieYear }}</h6>
     </div>
-    <div
-      class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center align-items-center h-100 mt-md-0 mt-2 px-0"
-    >
-      <h5 *ngFor="let genre of movie.genre">
-        <span class="badge bg-warning text-dark me-2 mb-2">{{ genre }}</span>
-      </h5>
-    </div>
   </div>
   <div
     class="row movie-image-row p-5 mx-3 mx-sm-5 rounded-1"
-    [style]="{ backgroundImage: 'url(' + movie.movieBackdrop + ')' }"
+    [style]="{ backgroundImage: 'url(' + movie.backdropPath + ')' }"
   >
     <div class="col-4">
       <div class="image-wrapper p-md-4">
-        <img [src]="movie.moviePoster" [alt]="movie.title" />
+        <img [src]="movie.posterPath" [alt]="movie.title" />
       </div>
     </div>
   </div>

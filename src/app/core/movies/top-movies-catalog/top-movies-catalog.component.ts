@@ -33,14 +33,11 @@ export class TopMoviesCatalogComponent implements OnInit {
     this.translateService.use(lang);
     document.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
+  
   initMoviesFetching() {
     this.isLoading = true;
     this.moviesStorageService
-      .fetchMovieGenres()
-      .pipe(
-        take(1),
-        concatMap(() => this.moviesStorageService.fetchTopMovies())
-      )
+      .fetchMovies()
       .subscribe(() => {
         this.setMovies();
         this.isLoading = false;
@@ -58,7 +55,7 @@ export class TopMoviesCatalogComponent implements OnInit {
   pageChanged(page: number) {
     this.p = page;
     this.isLoading = true;
-    this.moviesStorageService.fetchTopMovies(page).subscribe(() => {
+    this.moviesStorageService.fetchMovies(page).subscribe(() => {
       this.setMovies();
       this.isLoading = false;
     });

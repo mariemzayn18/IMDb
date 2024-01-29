@@ -56,19 +56,10 @@ describe('TopMoviesCatalogComponent', () => {
   });
 
   it('should fetch movie genres and top movies on init', fakeAsync(() => {
-    let genreSpy = spyOn(
-      moviesStorageService,
-      'fetchMovieGenres'
-    ).and.returnValue(
-      of(expectedGenres).pipe(
-        tap((data) => {
-          moviesService.setMovieGenres(data);
-        })
-      )
-    );
+    
     let movieSpy = spyOn(
       moviesStorageService,
-      'fetchTopMovies'
+      'fetchMovies'
     ).and.returnValue(
       of(expectedMovies).pipe(
         tap((data) => {
@@ -81,11 +72,9 @@ describe('TopMoviesCatalogComponent', () => {
     tick();
 
     // check if the methods are called
-    expect(genreSpy).toHaveBeenCalled();
     expect(movieSpy).toHaveBeenCalled();
 
     // check if the data is set correctly in the service
-    expect(moviesService.genres.length).toEqual(expectedGenres.length);
     expect(moviesService.movies.length).toEqual(expectedMovies.length);
 
     // double check if the data is set correctly in the service
@@ -93,15 +82,8 @@ describe('TopMoviesCatalogComponent', () => {
   }));
 
   it('should handle error when fetching movies on init', fakeAsync(() => {
-    spyOn(moviesStorageService, 'fetchMovieGenres').and.returnValue(
-      of(expectedGenres).pipe(
-        tap((data) => {
-          moviesService.setMovieGenres(data);
-        })
-      )
-    );
-
-    spyOn(moviesStorageService, 'fetchTopMovies').and.returnValue(
+    
+    spyOn(moviesStorageService, 'fetchMovies').and.returnValue(
       throwError(() => new Error('An error occurred. Please try again.'))
     );
 
