@@ -51,8 +51,11 @@ export class AuthService {
   }
 
   //----------- Logging out, either manually or due to token's expired.
-  
+
   logout() {
+    let logoutObs = this.http.post(environment.logoutAPI, {});
+    logoutObs.subscribe();
+
     this.user.next(null);
 
     this.router.navigate(['']);
